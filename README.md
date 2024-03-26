@@ -8,32 +8,32 @@
 * [Ressources](#ressources)
 * [Licence](#licence)
 
-#**Description**
+# **Description**
 
 Ce projet utilise le robot Marty et le langage Python pour le faire naviguer dans un labyrinthe. Le robot devra se déplacer de manière autonome en utilisant ses capteurs pour détecter les murs et/ou les obstacles.
 
-#**Objectifs**
+# **Objectifs**
 
  Apprendre à programmer le robot Marty en Python
  Développer des compétences en robotique et en navigation autonome
 
-#**Prérequis**
+# **Prérequis**
 
  Robot Marty
  Logiciel de programmation Python
 
-#**Remarques**
+# **Remarques**
 
  Ce projet est un point de départ pour apprendre à programmer le robot Marty et à le faire naviguer dans un labyrinthe.
  Vous pouvez étendre ce projet en ajoutant de nouvelles fonctionnalités, telles que la détection d'objets ou la planification de trajectoire.
 
-#**Contributeurs**
+# **Contributeurs**
 
--Druhet Joachim
--Guillot Natthan
--Vidal Ewan
+- Druhet Joachim
+- Guillot Natthan
+- Vidal Ewan
 
-#**Liens utiles**
+# **Liens utiles**
 
- -Site web Marty: https://robotical.io/?currency=USD
- -GitHub Marty: https://github.com/ewanvidal/Marty
+ - Site web Marty: https://robotical.io/?currency=USD
+ - GitHub Marty: https://github.com/ewanvidal/Marty

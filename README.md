@@ -28,8 +28,8 @@ Ce projet utilise le robot Marty et le langage Python pour le faire naviguer dan
 
 ### **Contributeurs**
 
-- Druhet Joachim
 - Guillot Natthan
+- Druhet Joachim
 - Vidal Ewan
 
 ### **Liens utiles**

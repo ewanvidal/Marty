@@ -1,46 +1,88 @@
 import sys
-from PyQt6.QtWidgets import QWidget, QLabel, QApplication, QPushButton
-from PyQt6.QtGui import QIcon, QFont    
+from PyQt6.QtWidgets import QApplication, QWidget, QVBoxLayout, QPushButton, QLineEdit, QLabel
+from PyQt6.QtCore import Qt
+from CustomTitleBar import CustomTitleBar
 
-class Interface(QWidget):
+class MartyRobotController(QWidget):
     def __init__(self):
         super().__init__()
+
         self.initUI()
 
     def initUI(self):
-        self.setGeometry(100, 100, 600, 400)
-        self.setWindowTitle('Commandes Morty')
-        self.setWindowIcon(QIcon("src/img/robot_icon.ico"))
-        self.label = QLabel('Choix du mode de connection', self)
-        self.label.setFont(QFont('Arial', 20, QFont.Weight.Bold))
-        self.label.move(100, 5)
+        self.setWindowTitle("Marty Robot Controller")
+        self.setGeometry(200, 200, 600, 400)
 
-        self.usbButton = QPushButton('USB', self)
-        self.usbButton.setFont(QFont('Arial', 15, QFont.Weight.Bold))
-        self.usbButton.resize(200, 150)
-        self.usbButton.move(200, 50)
-        self.usbButton.clicked.connect(self.on_click_usb)
+        self.layout = QVBoxLayout()
+        
+        # Add custom title bar
+        self.titleBar = CustomTitleBar(self)
+        self.layout.addWidget(self.titleBar)
+        
 
-        self.wifiButton = QPushButton('Wifi', self)
-        self.wifiButton.setFont(QFont('Arial', 15, QFont.Weight.Bold))  
-        self.wifiButton.resize(200, 150)
-        self.wifiButton.move(200, 225)
-        self.wifiButton.clicked.connect(self.on_click_wifi)
-        self.show()
+        # Style the USB button
+        usbButton = QPushButton("USB")
+        usbButton.setStyleSheet("""
+            QPushButton {
+                background-color: #4CAF50;
+                color: white;
+                border: none;
+                border-radius: 5px;
+                padding: 10px;
+                font-size: 16px;
+                min-width: 100px;
+            }
+            QPushButton:hover {
+                background-color: #45a049;
+            }
+            QPushButton:pressed {
+                background-color: #3e8e41;
+            }
+        """)
+        usbButton.clicked.connect(self.usbClicked)
+        self.layout.addWidget(usbButton)
 
-    def on_click_usb(self):
-        print('Connection par USB')
+        # Style the WiFi button
+        wifiButton = QPushButton("WiFi")
+        wifiButton.setStyleSheet("""
+            QPushButton {
+                background-color: #2196F3;
+                color: white;
+                border: none;
+                border-radius: 5px;
+                padding: 10px;
+                font-size: 16px;
+                min-width: 100px;
+            }
+            QPushButton:hover {
+                background-color: #1976d2;
+            }
+            QPushButton:pressed {
+                background-color: #1565c0;
+            }
+        """)
+        wifiButton.clicked.connect(self.wifiClicked)
+        self.layout.addWidget(wifiButton)
 
-    def on_click_wifi(self):
-        print('Connection par Wifi')
+        self.ipInput = QLineEdit()
+        self.ipInput.setPlaceholderText("Enter IP address")
+        self.ipInput.hide()
+        self.layout.addWidget(self.ipInput)
 
-    
-def main():
+        self.setLayout(self.layout)
+
+    def usbClicked(self):
+        print("USB button clicked")
+
+    def wifiClicked(self):
+        for i in range(self.layout.count()): 
+            widget = self.layout.itemAt(i).widget()
+            if widget is not None:
+                widget.hide()
+        self.ipInput.show()
+
+if __name__ == "__main__":
     app = QApplication(sys.argv)
-    interface = Interface()
+    controller = MartyRobotController()
+    controller.show()
     sys.exit(app.exec())
-
-if __name__ == '__main__':
-    main()
-
-

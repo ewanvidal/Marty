@@ -1,19 +1,4 @@
-import martypy
-def connexion(connexionWifi=True, ip_adress="192.168.0.100"):
-    if connexionWifi:
-        try:
-            my_marty = martypy.Marty("wifi", ip_adress)
-            return True
-        except: 
-            print("connexion wifi impossible")
-            return False
-    else:
-        try:
-            my_marty = martypy.Marty("USB")
-            return True
-        except: 
-            print("connexion USB impossible")
-            return False
+
 
 #distance en mm (retourne un entier)
 #my_marty.get_distance_sensor() 
@@ -25,3 +10,4 @@ def connexion(connexionWifi=True, ip_adress="192.168.0.100"):
 #Your color sensor can be named either 'LeftColorSensor' or 'RightColorSensor'
 #my_marty.foot_obstacle_sensed('RightIRFoot')
 #
+        

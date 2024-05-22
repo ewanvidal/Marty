@@ -1,7 +1,6 @@
 import sys
-from PyQt6.QtWidgets import QApplication, QWidget, QVBoxLayout, QPushButton, QLineEdit, QLabel
+from PyQt6.QtWidgets import QApplication, QWidget, QPushButton, QLineEdit, QLabel, QGridLayout, QProgressBar
 from PyQt6.QtCore import Qt
-from CustomTitleBar import CustomTitleBar
 
 class MartyRobotController(QWidget):
     def __init__(self):
@@ -13,73 +12,145 @@ class MartyRobotController(QWidget):
         self.setWindowTitle("Marty Robot Controller")
         self.setGeometry(200, 200, 600, 400)
 
-        self.layout = QVBoxLayout()
-        
-        # Add custom title bar
-        self.titleBar = CustomTitleBar(self)
-        self.layout.addWidget(self.titleBar)
+        grid = QGridLayout()
+
+        #create animated loading bar
+        self.loadingBar = QProgressBar()
+        self.loadingBar.setRange(0, 0)
+        grid.addWidget(self.loadingBar, 1, 0, 1, 1)
+        self.loadingBar.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.loadingBar.hide()
         
 
-        # Style the USB button
-        usbButton = QPushButton("USB")
-        usbButton.setStyleSheet("""
+        #create loading screen
+        self.loadingScreen = QLabel()
+        self.loadingScreen.setText("Loading...")
+        self.loadingScreen.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.loadingScreen.setStyleSheet("""
+            QLabel {
+                font-size: 20px;
+                font-weight: bold;
+            }
+        """)
+        grid.addWidget(self.loadingScreen, 1, 0, 1, 2)
+        self.loadingScreen.hide()
+
+        #create input for IP address
+        self.ipAddress = QLineEdit()
+        self.ipAddress.setPlaceholderText("Enter IP Address")
+        self.ipAddress.setMaxLength(15)
+        self.ipAddress.setStyleSheet("""
+            QLineEdit {
+                border: 2px solid #0047AB;
+                border-radius: 5px;
+                padding: 10px;
+                font-size: 20px;
+            }
+        """)
+        self.ipAddress.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        grid.addWidget(self.ipAddress, 1, 1, 1, 1)
+        self.ipAddress.hide()
+        
+        # Style the home button
+        self.homeButton = QPushButton("Home")
+        self.homeButton.setStyleSheet("""
             QPushButton {
                 background-color: #4CAF50;
                 color: white;
                 border: none;
                 border-radius: 5px;
                 padding: 10px;
-                font-size: 16px;
-                min-width: 100px;
-            }
-            QPushButton:hover {
-                background-color: #45a049;
-            }
-            QPushButton:pressed {
-                background-color: #3e8e41;
+                width: 200px;
+                width: 50px;
+                font-size: 20px;
+                font-weight: bold;
             }
         """)
-        usbButton.clicked.connect(self.usbClicked)
-        self.layout.addWidget(usbButton)
-
-        # Style the WiFi button
-        wifiButton = QPushButton("WiFi")
-        wifiButton.setStyleSheet("""
+        self.homeButton.hide()
+        self.homeButton.clicked.connect(self.homeClicked)
+        
+        self.mainTitle = QLabel("Marty Robot Controller")
+        self.mainTitle.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.mainTitle.setStyleSheet("""
+            QLabel {
+                color: black;
+                font-size: 40px;
+                font-weight: bold;
+                padding: 0px;
+                margin: 0px;
+            }
+        """)
+        
+        # Style the USB button
+        self.usbButton = QPushButton("USB")
+        self.usbButton.setStyleSheet("""
             QPushButton {
-                background-color: #2196F3;
+                background-color: #4CAF50;
                 color: white;
                 border: none;
                 border-radius: 5px;
                 padding: 10px;
-                font-size: 16px;
-                min-width: 100px;
-            }
-            QPushButton:hover {
-                background-color: #1976d2;
-            }
-            QPushButton:pressed {
-                background-color: #1565c0;
+                width: 200px;
+                height: 50px;
+                font-size: 20px;
+                font-weight: bold;
             }
         """)
-        wifiButton.clicked.connect(self.wifiClicked)
-        self.layout.addWidget(wifiButton)
+        self.usbButton.clicked.connect(self.usbClicked)
+        
+        self.wifiButton = QPushButton("WiFi")
+        self.wifiButton.setStyleSheet("""
+            QPushButton {
+                background-color: #0047AB;
+                color: white;
+                border: none;
+                border-radius: 5px;
+                padding: 10px;
+                width: 200px;
+                height: 50px;
+                font-size: 20px;
+                font-weight: bold;
+            }
+        """)
+        self.wifiButton.clicked.connect(self.wifiClicked)
+        
+        
+        grid.addWidget(self.mainTitle, 1, 0, 1, 2)
+        grid.addWidget(self.homeButton, 0, 1, 1, 1)
+        grid.addWidget(self.usbButton, 2, 0, 1, 1)
+        grid.addWidget(self.wifiButton, 2, 1, 1, 1)   
 
-        self.ipInput = QLineEdit()
-        self.ipInput.setPlaceholderText("Enter IP address")
-        self.ipInput.hide()
-        self.layout.addWidget(self.ipInput)
-
-        self.setLayout(self.layout)
+        self.setLayout(grid)
 
     def usbClicked(self):
-        print("USB button clicked")
-
-    def wifiClicked(self):
-        for i in range(self.layout.count()): 
-            widget = self.layout.itemAt(i).widget()
+        vbox = self.layout()
+        for i in range(vbox.count()): 
+            widget = vbox.itemAt(i).widget()
             if widget is not None:
                 widget.hide()
-        self.ipInput.show()
+        self.loadingScreen.show()
+        self.loadingBar.show()
+        
+
+    def wifiClicked(self):
+        vbox = self.layout()
+        for i in range(vbox.count()): 
+            widget = vbox.itemAt(i).widget()
+            if widget is not None:
+                widget.hide()
+        self.ipAddress.show()
+        self.homeButton.show()
+        
+    def homeClicked(self):
+        vbox = self.layout()
+        for i in range(vbox.count()): 
+            widget = vbox.itemAt(i).widget()
+            if widget is not None:
+                widget.hide()
+        self.homeButton.show()
+        self.usbButton.show()
+        self.wifiButton.show()
+        self.mainTitle.show()
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)

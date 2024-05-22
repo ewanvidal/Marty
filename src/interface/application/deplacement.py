@@ -14,6 +14,8 @@ def rotate(angle,my_marty):
             my_marty.walk(0,'auto',-15)
             angle=angle+15
         my_marty.walk(0,'auto',angle)
-def recule(distance,my_marty):
+def retourner(distance,my_marty):
     rotate(180,my_marty)
     avance(distance,my_marty)
+def recule(distance,my_marty):
+    my_marty.walk(distance,'auto',0,-25,1500,None)

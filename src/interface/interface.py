@@ -1,4 +1,8 @@
 import sys
+
+from application.connexion import *
+from application.deplacement import *
+
 from PyQt6.QtWidgets import QApplication, QWidget, QPushButton, QLineEdit, QLabel, QGridLayout, QProgressBar
 from PyQt6.QtCore import Qt
 from PyQt6.QtGui import QIcon
@@ -149,7 +153,10 @@ class MartyRobotController(QWidget):
         
         
     def onReturnPressed(self):
-        connexion(True, self.ipAddress.text())
+        (connecter,my_marty)=connexion(True, self.ipAddress.text())
+        if (connecter):
+            print("le robot est connecté")
+        avance(5,my_marty)
         
     def homeClicked(self):
         vbox = self.layout()

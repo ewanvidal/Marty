@@ -3,6 +3,7 @@ def avance(distance,my_marty):
     my_marty.stand_straight()
     my_marty.walk(distance,'auto',0,25,1500,None)
 def rotate(angle,my_marty):
+    my_marty.stand_straight()
     if(angle>0):
         while(angle>15):
             my_marty.walk(0,'auto',15)

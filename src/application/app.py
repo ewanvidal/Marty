@@ -5,7 +5,6 @@ def main():
     
     (connecter,my_marty)=connexion(True)
     if(connecter):print("le robot est connecté")
-    avance(5,my_marty)
-    recule(5,my_marty)
-    rotate(117,'right',my_marty)
+    avance(2,my_marty)
+    recule(2,my_marty)
 main()

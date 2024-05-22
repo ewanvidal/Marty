@@ -1,6 +1,9 @@
 import sys
 from PyQt6.QtWidgets import QApplication, QWidget, QPushButton, QLineEdit, QLabel, QGridLayout, QProgressBar
 from PyQt6.QtCore import Qt
+from PyQt6.QtGui import QIcon
+from application.connexion import connexion
+
 
 class MartyRobotController(QWidget):
     def __init__(self):
@@ -11,6 +14,7 @@ class MartyRobotController(QWidget):
     def initUI(self):
         self.setWindowTitle("Marty Robot Controller")
         self.setGeometry(200, 200, 600, 400)
+        self.setWindowIcon(QIcon("src/img/robot_icon.ico"))
 
         grid = QGridLayout()
 
@@ -130,6 +134,7 @@ class MartyRobotController(QWidget):
                 widget.hide()
         self.loadingScreen.show()
         self.loadingBar.show()
+        connexion(False)
         
 
     def wifiClicked(self):
@@ -140,6 +145,11 @@ class MartyRobotController(QWidget):
                 widget.hide()
         self.ipAddress.show()
         self.homeButton.show()
+        self.ipAddress.returnPressed.connect(self.onReturnPressed)
+        
+        
+    def onReturnPressed(self):
+        connexion(True, self.ipAddress.text())
         
     def homeClicked(self):
         vbox = self.layout()
@@ -151,6 +161,7 @@ class MartyRobotController(QWidget):
         self.usbButton.show()
         self.wifiButton.show()
         self.mainTitle.show()
+        
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)

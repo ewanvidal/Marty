@@ -138,8 +138,10 @@ class MartyRobotController(QWidget):
                 widget.hide()
         self.loadingScreen.show()
         self.loadingBar.show()
-        connexion(False)
-        
+        (connecter, my_marty)=connexion(False)
+        if(connecter):
+            print("Le robot est connecté")
+            self.my_marty = my_marty
 
     def wifiClicked(self):
         vbox = self.layout()
@@ -156,8 +158,11 @@ class MartyRobotController(QWidget):
         (connecter,my_marty)=connexion(True, self.ipAddress.text())
         if (connecter):
             print("le robot est connecté")
-        avance(5,my_marty)
-        
+            self.my_marty = my_marty
+            
+    def getMyMarty(self):
+        return self.my_marty
+
     def homeClicked(self):
         vbox = self.layout()
         for i in range(vbox.count()): 

@@ -41,4 +41,17 @@ def deplacement_couleur(couleur):
             return "center"
         
 
+
+
+
+
+
+
+
+
+
+
+
+
+
         

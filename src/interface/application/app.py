@@ -1,5 +1,4 @@
 from martypy import Marty
-import time
 from connexion import connexion
 from deplacement import avance,rotate,recule
 def main():

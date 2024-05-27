@@ -15,7 +15,7 @@ class MainWindow(QMainWindow):
         
         self.setWindowTitle("My App")
 
-        button = QPushButton("Avancer")
+        button = QPushButton("Couleur")
         button.setCheckable(True)
         button.clicked.connect(self.the_button_was_clicked)
 
@@ -23,7 +23,8 @@ class MainWindow(QMainWindow):
 
     def the_button_was_clicked(self):
         print("Clicked!")
-        avance(10, my_marty)
+        print(my_marty.get_ground_sensor_reading('LeftColorSensor'))
+
 
 app = QApplication(sys.argv)
 

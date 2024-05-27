@@ -1,4 +1,8 @@
 import sys
+
+from application.connexion import *
+from application.deplacement import *
+
 from PyQt6.QtWidgets import QApplication, QWidget, QPushButton, QLineEdit, QLabel, QGridLayout, QProgressBar
 from PyQt6.QtCore import Qt
 from PyQt6.QtGui import QIcon
@@ -134,8 +138,10 @@ class MartyRobotController(QWidget):
                 widget.hide()
         self.loadingScreen.show()
         self.loadingBar.show()
-        connexion(False)
-        
+        (connecter, my_marty)=connexion(False)
+        if(connecter):
+            print("Le robot est connecté")
+            self.my_marty = my_marty
 
     def wifiClicked(self):
         vbox = self.layout()
@@ -149,8 +155,14 @@ class MartyRobotController(QWidget):
         
         
     def onReturnPressed(self):
-        connexion(True, self.ipAddress.text())
-        
+        (connecter,my_marty)=connexion(True, self.ipAddress.text())
+        if (connecter):
+            print("le robot est connecté")
+            self.my_marty = my_marty
+            
+    def getMyMarty(self):
+        return self.my_marty
+
     def homeClicked(self):
         vbox = self.layout()
         for i in range(vbox.count()): 

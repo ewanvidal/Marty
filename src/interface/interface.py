@@ -160,6 +160,7 @@ class MartyRobotController(QWidget):
         (connecter, my_marty)=connexion(False)
         if(connecter):
             print("Le robot est connecté")
+            self.my_marty.play_mp3("sounds/Connect.mp3")
             self.my_marty = my_marty
 
     def wifiClicked(self):
@@ -179,10 +180,12 @@ class MartyRobotController(QWidget):
             if (connecter):
                 print("le robot est connecté")
                 self.my_marty = my_marty
+                self.my_marty.play_mp3("src\sounds\Connect.mp3")
         else:
             (connecter,my_marty)=connexion(True, self.ipAddress.text())
             if (connecter):
                 print("le robot est connecté")
+                self.my_marty.play_mp3("sounds/Connect.mp3")
                 self.my_marty = my_marty
             
     def getMyMarty(self):
@@ -244,9 +247,11 @@ class MartyRobotController(QWidget):
                 #emotes
                 elif event.key() == Qt.Key.Key_1:
                     self.my_marty.celebrate()
+                    self.my_marty.play_sound("whisle")
                     print("celebration in progress !")
                 elif event.key() == Qt.Key.Key_2:
                     self.my_marty.dance()
+                    self.my_marty.play_sound("whisle")
                     print("dancing in progress !")
                 elif event.key() == Qt.Key.Key_3:
                     self.my_marty.circle_dance()

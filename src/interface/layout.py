@@ -24,6 +24,10 @@ class MainWindow(QMainWindow):
     def the_button_was_clicked(self):
         print("Clicked!")
         print(my_marty.get_ground_sensor_reading('LeftColorSensor'))
+        print("Red : " + str(my_marty.get_color_sensor_value_by_channel("left", "red")))
+        print("Green : " + str(my_marty.get_color_sensor_value_by_channel("left", "green")))
+        print("Blue : " + str(my_marty.get_color_sensor_value_by_channel("left", "blue")))
+        
 
 
 app = QApplication(sys.argv)

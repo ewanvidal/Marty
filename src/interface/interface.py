@@ -261,6 +261,9 @@ class MartyRobotController(QWidget):
                 elif event.key() == Qt.Key.Key_6:
                     self.my_marty.lean("forward", 50, 500)
                     print("leaning forward")
+                elif event.key() == Qt.Key.Key_7:
+                    self.my_marty.arms(45)
+                    print("raising arms")
                 elif event.key() == Qt.Key.Key_Escape:
                     self.my_marty.stop()
                     print("stopping")

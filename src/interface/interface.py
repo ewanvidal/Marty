@@ -7,7 +7,6 @@ from PyQt6.QtWidgets import QApplication, QWidget, QPushButton, QLineEdit, QLabe
 from PyQt6.QtCore import Qt
 from PyQt6.QtGui import QIcon, QKeyEvent
 from application.connexion import connexion
-from application.labyrinthe import labyrinthe
 
 
 class MartyRobotController(QWidget):
@@ -233,10 +232,6 @@ class MartyRobotController(QWidget):
             elif event.key() == Qt.Key.Key_Escape:
                 self.my_marty.stop()
                 print("stopping")
-            elif event.key() == Qt.Key.Key_L:
-                print("l")
-                labyrinthe(self.my_marty)
-                print("labyrinthe")
             else:
                 print("Key not recognized")
         else:

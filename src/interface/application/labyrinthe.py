@@ -2,6 +2,7 @@
 from application.deplacement import avance,rotate,recule,retourner,deplacement_couleur,movementDirection
 from application.emotion import regard,danse,celebre
 from application.sensors import getColorReading,getObstacleLeft,getObstacleRight,getGroundRight,getGroundLeft,getDistRight,getDistLeft
+from time import *
 
 def labyrintheColor(my_marty1):
     #(connecter1,my_marty2)=connexion(True,"192.168.0.101")
@@ -19,6 +20,8 @@ def labyrintheColor(my_marty1):
             if (color!=None):
                 movement = deplacement_couleur(color)
                 end1=movementDirection(my_marty1,movement)
+            else :
+                sleep(2)
         #if (end2==False):
             #color = getColorReading(my_marty2)
             #movement = deplacement_couleur(color)

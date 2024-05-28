@@ -1,6 +1,6 @@
 from martypy import Marty
 from connexion import connexion
-from deplacement import avance,rotate,recule,retourner,deplacement_couleur,movementColorLab
+from deplacement import avance,rotate,recule,retourner,deplacement_couleur,movementDirection
 from emotion import regard,danse,celebre
 from sensors import getColorReading,getObstacleLeft,getObstacleRight,getGroundRight,getGroundLeft,getDistRight,getDistLeft
 
@@ -16,9 +16,13 @@ def labyrinthe():
     end2=False
     while (end1==False or end2==False):
         if (end1==False):
-            end1=movementColorLab(my_marty1)
+            color = getColorReading(my_marty1)
+            movement = deplacement_couleur(color)
+            end1=movementDirection(my_marty1,movement)
         if (end2==False):
-            end2=movementColorLab(my_marty2)
+            color = getColorReading(my_marty2)
+            movement = deplacement_couleur(color)
+            end2=movementDirection(my_marty2,movement)
     if (end1 and end2):
         celebre(my_marty1)
         celebre(my_marty2)

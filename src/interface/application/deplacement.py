@@ -43,9 +43,7 @@ def deplacement_couleur(couleur):
     else :
         print("Couleur non valide")
 
-def movementColorLab(my_marty):
-    color = getColorReading(my_marty)
-    movement = deplacement_couleur(color)
+def movementDirection(my_marty,movement):
     if movement == "forward" :
         avance(my_marty,3)
         return False

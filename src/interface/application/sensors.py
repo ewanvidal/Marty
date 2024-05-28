@@ -2,24 +2,36 @@ from martypy import Marty
 
 def getColorReading(my_marty):
     reading = my_marty.get_ground_sensor_reading("left")
-    color = str(reading)
-    if color == "36" or color == "37":
-        color = "green"
-        return color
-    elif reading >114:
-        color = "yellow"
-        return color
-    elif color == "39" or color == "40":
-        color = "blue"
-        return color
-    elif reading > 97 or reading < 105:
-        color = "red"
-        return color
-    elif color == "31" or color == "32" or color=="33" or color=="34":
-        color = "purple"
-        return color
+    if reading == 36 or reading == 37:
+        return "green"
+    elif reading > 114:
+        return "yellow"
+    elif reading == 39 or reading == 40:
+        return "blue"
+    elif reading > 97 and reading < 105:
+        return "red"
+    elif reading > 31 and reading < 34:
+        return "purple"
     else :
         print("Demandez aux développeurs d'ajouter cette couleur dans la base de données")
+
+def getColorReadingRGB(my_marty):
+    reading_red = my_marty.get_color_sensor_value_by_channel("left", "red")
+    reading_blue = my_marty.get_color_sensor_value_by_channel("left", "blue")
+    reading_green = my_marty.get_color_sensor_value_by_channel("left", "green")
+    if (reading_red > 63 and reading_red < 65.5) and (reading_green > 56 and reading_green < 59) and (reading_blue > 86 and reading_blue < 89) :
+        return "blue"
+    elif (reading_red > 167 and reading_red < 171) and (reading_green > 25 and reading_green < 27.5) and (reading_blue > 39 and reading_blue < 42) :
+        return "red"
+    elif (reading_red > 190 and reading_red < 196) and (reading_green > 93 and reading_green < 95) and (reading_blue > 65 and reading_blue < 68) :
+        return "yellow"
+    elif (reading_red > 60 and reading_red < 62) and (reading_green > 42.5 and reading_green < 44.5) and (reading_blue > 34 and reading_blue < 36) :
+        return "green"
+    elif (reading_red > 53 and reading_red < 57) and (reading_green > 26 and reading_green < 30) and (reading_blue > 46 and reading_blue < 49) :
+        return "purple"
+    else :
+        print("Demandez aux développeurs d'ajouter cette couleur dans la base de données")
+    
 
 def getObstacleLeft(my_marty):
     obstacleL = my_marty.foot_obstacle_sensed('LeftColorSensor')

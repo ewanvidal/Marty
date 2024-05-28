@@ -15,6 +15,7 @@ class MartyRobotController(QWidget):
         super().__init__()
 
         self.initUI()
+        self.isControlled = False
 
     def initUI(self):
         self.setWindowTitle("Marty Robot Controller")
@@ -45,8 +46,7 @@ class MartyRobotController(QWidget):
             }
         """)
         self.control_button.clicked.connect(self.controlClicked)
-        grid.addWidget(self.control_button, 3, 1, 1, 1)
-        self.control_button.show()
+        self.control_button.hide()
 
         #create loading screen
         self.loadingScreen = QLabel()
@@ -199,6 +199,7 @@ class MartyRobotController(QWidget):
         self.wifiButton.show()
         self.mainTitle.show()
         self.control_button.show()
+        self.isControlled = False
         
     def controlClicked(self):
         vbox = self.layout()
@@ -212,41 +213,43 @@ class MartyRobotController(QWidget):
         if self.my_marty is not None:
             self.setFocusPolicy(Qt.FocusPolicy.StrongFocus)
             self.setFocus()
+            self.isControlled = True
         else:
             print("No marty object available")
             self.homeClicked()
 
     def keyPressEvent(self, event):
-        if self.my_marty is not None:
-            if event.key() == Qt.Key.Key_Z:
-                movementDirection(self.my_marty,"forward")
-                print("walking forward")
-            elif event.key() == Qt.Key.Key_S:
-                movementDirection(self.my_marty,"backwards")
-                print("walking backward")
-            elif event.key() == Qt.Key.Key_Q:
-                movementDirection(self.my_marty,"left")
-                print("turning left")
-            elif event.key() == Qt.Key.Key_D:
-                movementDirection(self.my_marty,"right")
-                print("turning right")
-            elif event.key() == Qt.Key.Key_1:
-                self.my_marty.celebrate()
-                print("celebration in progress !")
-            elif event.key() == Qt.Key.Key_2:
-                self.my_marty.dance()
-                print("dancing in progress !")
-            elif event.key() == Qt.Key.Key_Escape:
-                self.my_marty.stop()
-                print("stopping")
-            elif event.key() == Qt.Key.Key_L:
-                print("l")
-                labyrintheColor(self.my_marty)
-                print("labyrinthe")
+        if self.isControlled:
+            if self.my_marty is not None:
+                if event.key() == Qt.Key.Key_Z:
+                    movementDirection(self.my_marty,"forward")
+                    print("walking forward")
+                elif event.key() == Qt.Key.Key_S:
+                    movementDirection(self.my_marty,"backwards")
+                    print("walking backward")
+                elif event.key() == Qt.Key.Key_Q:
+                    movementDirection(self.my_marty,"left")
+                    print("turning left")
+                elif event.key() == Qt.Key.Key_D:
+                    movementDirection(self.my_marty,"right")
+                    print("turning right")
+                elif event.key() == Qt.Key.Key_1:
+                    self.my_marty.celebrate()
+                    print("celebration in progress !")
+                elif event.key() == Qt.Key.Key_2:
+                    self.my_marty.dance()
+                    print("dancing in progress !")
+                elif event.key() == Qt.Key.Key_Escape:
+                    self.my_marty.stop()
+                    print("stopping")
+                elif event.key() == Qt.Key.Key_L:
+                    print("l")
+                    labyrintheColor(self.my_marty)
+                    print("labyrinthe")
+                else:
+                    print("Key not recognized")
             else:
-                print("Key not recognized")
-        else:
-            print("No marty object available")
+                print("No marty object available")
     
     
 if __name__ == "__main__":

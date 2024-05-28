@@ -5,7 +5,7 @@ from application.deplacement import *
 
 from PyQt6.QtWidgets import QApplication, QWidget, QPushButton, QLineEdit, QLabel, QGridLayout, QProgressBar
 from PyQt6.QtCore import Qt
-from PyQt6.QtGui import QIcon
+from PyQt6.QtGui import QIcon, QKeyEvent
 from application.connexion import connexion
 
 
@@ -19,6 +19,7 @@ class MartyRobotController(QWidget):
         self.setWindowTitle("Marty Robot Controller")
         self.setGeometry(200, 200, 600, 400)
         self.setWindowIcon(QIcon("src/img/robot_icon.ico"))
+        self.my_marty = None
 
         grid = QGridLayout()
 
@@ -29,6 +30,22 @@ class MartyRobotController(QWidget):
         self.loadingBar.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.loadingBar.hide()
         
+        self.control_button = QPushButton("Control")
+        self.control_button.setStyleSheet("""
+            QPushButton {
+                background-color: #4CAF50;
+                color: white;
+                border: none;
+                border-radius: 5px;
+                padding: 10px;
+                width: 200px;
+                font-size: 20px;
+                font-weight: bold;
+            }
+        """)
+        self.control_button.clicked.connect(self.controlClicked)
+        grid.addWidget(self.control_button, 3, 1, 1, 1)
+        self.control_button.show()
 
         #create loading screen
         self.loadingScreen = QLabel()
@@ -127,6 +144,7 @@ class MartyRobotController(QWidget):
         grid.addWidget(self.homeButton, 0, 1, 1, 1)
         grid.addWidget(self.usbButton, 2, 0, 1, 1)
         grid.addWidget(self.wifiButton, 2, 1, 1, 1)   
+        grid.addWidget(self.control_button, 1, 0, 1, 2)
 
         self.setLayout(grid)
 
@@ -174,7 +192,47 @@ class MartyRobotController(QWidget):
         self.wifiButton.show()
         self.mainTitle.show()
         
+    def controlClicked(self):
+        vbox = self.layout()
+        for i in range(vbox.count()): 
+            widget = vbox.itemAt(i).widget()
+            if widget is not None:
+                widget.hide()
+        self.control_button.show()
+        self.homeButton.show()
+        self.my_marty = self.getMyMarty()
 
+        
+
+    def keyPressEvent(self, event):
+        if self.my_marty is not None:
+            if event.key() == Qt.Key.Key_Z:
+                self.my_marty.walk(1)
+                print("walking forward")
+            elif event.key() == Qt.Key.Key_S:
+                self.my_marty.walk(-1)
+                print("walking backward")
+            elif event.key() == Qt.Key.Key_Q:
+                self.my_marty.turn(-1)
+                print("turning left")
+            elif event.key() == Qt.Key.Key_D:
+                self.my_marty.turn(1)
+                print("turning right")
+            elif event.key() == Qt.Key.Key_1:
+                self.my_marty.celebrate()
+                print("celebration in progress !")
+            elif event.key() == Qt.Key.Key_2:
+                self.my_marty.dance()
+                print("dancing in progress !")
+            elif event.key() == Qt.Key.Key_Escape:
+                self.my_marty.stop()
+                print("stopping")
+            else:
+                print("Key not recognized")
+        else:
+            print("No marty object available")
+    
+    
 if __name__ == "__main__":
     app = QApplication(sys.argv)
     controller = MartyRobotController()

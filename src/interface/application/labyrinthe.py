@@ -27,11 +27,9 @@ def labyrintheColor(my_marty1):
         celebre(my_marty1)
         #celebre(my_marty2)
 
-def labyrintheMur(my_marty1):
+#def labyrintheMur(my_marty1):
     #(connecter1,my_marty2)=connexion(True,"192.168.0.101")
     #(connecter2,my_marty2)=connexion(True,"192.168.0.10")
-    connecter2=True
-    connecter1=True
-    if (not(connecter1 and connecter2)):
-
-
+#    connecter2=True
+ #   connecter1=True
+  #  if (not(connecter1 and connecter2)):

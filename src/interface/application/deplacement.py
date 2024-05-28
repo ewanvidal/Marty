@@ -66,13 +66,4 @@ def movementDirection(my_marty,movement):
 
 
 
-
-
-
-
-
-
-
-
-
         

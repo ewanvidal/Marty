@@ -221,6 +221,7 @@ class MartyRobotController(QWidget):
     def keyPressEvent(self, event):
         if self.isControlled:
             if self.my_marty is not None:
+                #basic movement
                 if event.key() == Qt.Key.Key_Z:
                     movementDirection(self.my_marty,"forward")
                     print("walking forward")
@@ -233,12 +234,36 @@ class MartyRobotController(QWidget):
                 elif event.key() == Qt.Key.Key_D:
                     movementDirection(self.my_marty,"right")
                     print("turning right")
+                elif event.key() == Qt.Key.Key_A:
+                    rotate(self.my_marty, -15)
+                    print("rotating left")
+                elif event.key() == Qt.Key.Key_E:
+                    rotate(self.my_marty, 15)
+                    print("rotating right")
+                #emotes
                 elif event.key() == Qt.Key.Key_1:
                     self.my_marty.celebrate()
                     print("celebration in progress !")
                 elif event.key() == Qt.Key.Key_2:
                     self.my_marty.dance()
+                    self.my_marty.disco_pattern()
                     print("dancing in progress !")
+                elif event.key() == Qt.Key.Key_3:
+                    self.my_marty.circle_dance()
+                    print("circle dancing in progress !")
+                elif event.key() == Qt.Key.Key_4:
+                    self.my_marty.circle_dance()
+                    self.my_marty.disco_pattern()
+                    print("circle dancing in progress !")
+                elif event.key() == Qt.Key.Key_5:
+                    self.my_marty.look_around()
+                    print("looking around")
+                elif event.key() == Qt.Key.Key_6:
+                    self.my_marty.lean("forward", 50, 500)
+                    print("leaning forward")
+                elif event.key() == Qt.Key.Key_7:
+                    self.my_marty.arms(45)
+                    print("raising arms")
                 elif event.key() == Qt.Key.Key_Escape:
                     self.my_marty.stop()
                     print("stopping")

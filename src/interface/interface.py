@@ -7,7 +7,7 @@ from PyQt6.QtWidgets import QApplication, QWidget, QPushButton, QLineEdit, QLabe
 from PyQt6.QtCore import Qt
 from PyQt6.QtGui import QIcon, QKeyEvent
 from application.connexion import connexion
-from application.labyrinthe import labyrinthe
+from application.labyrinthe import labyrintheColor
 
 
 class MartyRobotController(QWidget):
@@ -174,10 +174,16 @@ class MartyRobotController(QWidget):
         
         
     def onReturnPressed(self):
-        (connecter,my_marty)=connexion(True, self.ipAddress.text())
-        if (connecter):
-            print("le robot est connecté")
-            self.my_marty = my_marty
+        if self.ipAddress.text() == "":
+            (connecter,my_marty)=connexion(True)
+            if (connecter):
+                print("le robot est connecté")
+                self.my_marty = my_marty
+        else:
+            (connecter,my_marty)=connexion(True, self.ipAddress.text())
+            if (connecter):
+                print("le robot est connecté")
+                self.my_marty = my_marty
             
     def getMyMarty(self):
         return self.my_marty
@@ -235,7 +241,7 @@ class MartyRobotController(QWidget):
                 print("stopping")
             elif event.key() == Qt.Key.Key_L:
                 print("l")
-                labyrinthe(self.my_marty)
+                labyrintheColor(self.my_marty)
                 print("labyrinthe")
             else:
                 print("Key not recognized")

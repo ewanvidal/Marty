@@ -6,13 +6,13 @@ def getColorReading(my_marty):
     if color == "36" or color == "37":
         color = "green"
         return color
-    elif color >114:
+    elif reading >114:
         color = "yellow"
         return color
     elif color == "39" or color == "40":
         color = "blue"
         return color
-    elif color > "97" or color < "105":
+    elif reading > 97 or reading < 105:
         color = "red"
         return color
     elif color == "31" or color == "32" or color=="33" or color=="34":

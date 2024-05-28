@@ -3,18 +3,17 @@ from application.deplacement import avance,rotate,recule,retourner,deplacement_c
 from application.emotion import regard,danse,celebre
 from application.sensors import getColorReading,getObstacleLeft,getObstacleRight,getGroundRight,getGroundLeft,getDistRight,getDistLeft
 
-def labyrinthe(my_marty1):
+def labyrintheColor(my_marty1):
     #(connecter1,my_marty2)=connexion(True,"192.168.0.101")
     #(connecter2,my_marty2)=connexion(True,"192.168.0.10")
     connecter2=True
     connecter1=True
-    if (connecter1):print("Le robot 1 est connecté")
-    if (connecter2):print("Le robot 2 est connecté")
+    c
     if (not(connecter1 and connecter2)):
         print("Erreur de connexion, il faut que les deux robots soient connecté")
         return 0
     end1=False
-    end2=False
+    end2=True
     while (end1==False or end2==False):
         if (end1==False):
             color = getColorReading(my_marty1)
@@ -28,6 +27,14 @@ def labyrinthe(my_marty1):
         celebre(my_marty1)
         #celebre(my_marty2)
 
-
+def labyrintheMur(my_marty1):
+    #(connecter1,my_marty2)=connexion(True,"192.168.0.101")
+    #(connecter2,my_marty2)=connexion(True,"192.168.0.10")
+    connecter2=True
+    connecter1=True
+     #(connecter1,my_marty2)=connexion(True,"192.168.0.101")
+    #(connecter2,my_marty2)=connexion(True,"192.168.0.10")
+    connecter2=True
+    connecter1=True
 
 

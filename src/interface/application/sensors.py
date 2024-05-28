@@ -19,15 +19,23 @@ def getColorReadingRGB(my_marty):
     reading_red = my_marty.get_color_sensor_value_by_channel("left", "red")
     reading_blue = my_marty.get_color_sensor_value_by_channel("left", "blue")
     reading_green = my_marty.get_color_sensor_value_by_channel("left", "green")
-    if (reading_red > 63 and reading_red < 65.5) and (reading_green > 56 and reading_green < 59) and (reading_blue > 86 and reading_blue < 89) :
+    print(reading_red)
+    print(reading_green)
+    print(reading_blue)
+    if (reading_red > 63 and reading_red < 68) and (reading_green > 56 and reading_green < 62) and (reading_blue > 86 and reading_blue < 92) :
+        print("blue")
         return "blue"
-    elif (reading_red > 167 and reading_red < 171) and (reading_green > 25 and reading_green < 27.5) and (reading_blue > 39 and reading_blue < 42) :
+    elif (reading_red > 165 and reading_red < 171) and (reading_green > 25 and reading_green < 27.5) and (reading_blue > 39 and reading_blue < 42) :
+        print("red")
         return "red"
-    elif (reading_red > 190 and reading_red < 196) and (reading_green > 93 and reading_green < 95) and (reading_blue > 65 and reading_blue < 68) :
+    elif (reading_red > 190 and reading_red < 198) and (reading_green > 93 and reading_green < 95) and (reading_blue > 65 and reading_blue < 68) :
+        print("yellow")
         return "yellow"
-    elif (reading_red > 60 and reading_red < 62) and (reading_green > 42.5 and reading_green < 44.5) and (reading_blue > 34 and reading_blue < 36) :
+    elif (reading_red > 58 and reading_red < 62) and (reading_green > 41 and reading_green < 44.5) and (reading_blue > 32 and reading_blue < 36) :
+        print("green")
         return "green"
-    elif (reading_red > 53 and reading_red < 57) and (reading_green > 26 and reading_green < 30) and (reading_blue > 46 and reading_blue < 49) :
+    elif (reading_red > 51 and reading_red < 57) and (reading_green > 25 and reading_green < 30) and (reading_blue > 44 and reading_blue < 49) :
+        print("purple")
         return "purple"
     else :
         print("Demandez aux développeurs d'ajouter cette couleur dans la base de données")

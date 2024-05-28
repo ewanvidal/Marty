@@ -1,28 +1,28 @@
-from martypy import marty
+from martypy import Marty
 
 def getColorReading(my_marty):
-    reading = my_marty.get_ground_sensor_reading()
+    reading = my_marty.get_ground_sensor_reading("left")
     color = str(reading)
-    if color == "38" or color == "39":
+    if color == "36" or color == "37":
         color = "green"
         return color
-    elif color == "127" or color == "128":
+    elif color >114:
         color = "yellow"
         return color
-    elif color == "40" or color == "41":
+    elif color == "39" or color == "40":
         color = "blue"
         return color
-    elif color == "108" or color == "109":
+    elif color > "97" or color < "105":
         color = "red"
         return color
-    elif color == "35" or color == "36":
-        color == "purple"
+    elif color == "31" or color == "32" or color=="33" or color=="34":
+        color = "purple"
         return color
     else :
         print("Demandez aux développeurs d'ajouter cette couleur dans la base de données")
 
 def getObstacleLeft(my_marty):
-    obstacleL = my_marty.foot_obstacle_sensed('left')
+    obstacleL = my_marty.foot_obstacle_sensed('LeftColorSensor')
     return obstacleL
 
 def getObstacleRight(my_marty):

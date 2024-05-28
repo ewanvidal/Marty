@@ -17,7 +17,7 @@ class MartyRobotController(QWidget):
 
     def initUI(self):
         self.setWindowTitle("Marty Robot Controller")
-        self.setGeometry(200, 200, 600, 400)
+        self.setGeometry(400, 400, 800, 600)
         self.setWindowIcon(QIcon("src/img/robot_icon.ico"))
         self.my_marty = None
 
@@ -33,14 +33,14 @@ class MartyRobotController(QWidget):
         self.control_button = QPushButton("Control")
         self.control_button.setStyleSheet("""
             QPushButton {
-                background-color: #4CAF50;
-                color: white;
-                border: none;
-                border-radius: 5px;
-                padding: 10px;
-                width: 200px;
-                font-size: 20px;
-                font-weight: bold;
+            background-color: red;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px;
+            width: 200px;
+            font-size: 20px;
+            font-weight: bold;
             }
         """)
         self.control_button.clicked.connect(self.controlClicked)
@@ -139,12 +139,12 @@ class MartyRobotController(QWidget):
         """)
         self.wifiButton.clicked.connect(self.wifiClicked)
         
-        
         grid.addWidget(self.mainTitle, 1, 0, 1, 2)
         grid.addWidget(self.homeButton, 0, 1, 1, 1)
         grid.addWidget(self.usbButton, 2, 0, 1, 1)
         grid.addWidget(self.wifiButton, 2, 1, 1, 1)   
-        grid.addWidget(self.control_button, 1, 0, 1, 2)
+        grid.addWidget(self.control_button, 0, 0, 1, 1)
+        
 
         self.setLayout(grid)
 
@@ -187,10 +187,11 @@ class MartyRobotController(QWidget):
             widget = vbox.itemAt(i).widget()
             if widget is not None:
                 widget.hide()
-        self.homeButton.show()
+        self.homeButton.hide()
         self.usbButton.show()
         self.wifiButton.show()
         self.mainTitle.show()
+        self.control_button.show()
         
     def controlClicked(self):
         vbox = self.layout()
@@ -201,8 +202,12 @@ class MartyRobotController(QWidget):
         self.control_button.show()
         self.homeButton.show()
         self.my_marty = self.getMyMarty()
-
-        
+        if self.my_marty is not None:
+            self.setFocusPolicy(Qt.FocusPolicy.StrongFocus)
+            self.setFocus()
+        else:
+            print("No marty object available")
+            self.homeClicked()
 
     def keyPressEvent(self, event):
         if self.my_marty is not None:

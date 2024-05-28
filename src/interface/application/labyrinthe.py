@@ -8,7 +8,6 @@ def labyrintheColor(my_marty1):
     #(connecter2,my_marty2)=connexion(True,"192.168.0.10")
     connecter2=True
     connecter1=True
-    c
     if (not(connecter1 and connecter2)):
         print("Erreur de connexion, il faut que les deux robots soient connecté")
         return 0
@@ -17,8 +16,9 @@ def labyrintheColor(my_marty1):
     while (end1==False or end2==False):
         if (end1==False):
             color = getColorReading(my_marty1)
-            movement = deplacement_couleur(color)
-            end1=movementDirection(my_marty1,movement)
+            if (color!=None):
+                movement = deplacement_couleur(color)
+                end1=movementDirection(my_marty1,movement)
         #if (end2==False):
             #color = getColorReading(my_marty2)
             #movement = deplacement_couleur(color)
@@ -32,9 +32,6 @@ def labyrintheMur(my_marty1):
     #(connecter2,my_marty2)=connexion(True,"192.168.0.10")
     connecter2=True
     connecter1=True
-     #(connecter1,my_marty2)=connexion(True,"192.168.0.101")
-    #(connecter2,my_marty2)=connexion(True,"192.168.0.10")
-    connecter2=True
-    connecter1=True
+    if (not(connecter1 and connecter2)):
 
 

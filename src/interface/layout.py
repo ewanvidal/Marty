@@ -6,8 +6,20 @@ from application.deplacement import *
 from PyQt6.QtCore import Qt
 from PyQt6.QtGui import QAction
 from PyQt6.QtWidgets import QApplication, QLabel, QMainWindow, QTextEdit, QMenu, QPushButton
+from application.deplacement import rotate
 
 (connecter,my_marty)=connexion(True)
+avance(my_marty,2)
+obstSensorL = my_marty.get_obstacle_sensor_reading('left')
+obstSensorR = my_marty.get_obstacle_sensor_reading('right')
+print("obstSensorL: ",obstSensorL,"  |  obstSensorR:",obstSensorR)
+rotate(my_marty,30)
+obstSensorL = my_marty.get_obstacle_sensor_reading('left')
+obstSensorR = my_marty.get_obstacle_sensor_reading('right')
+print("obstSensorL: ",obstSensorL,"  |  obstSensorR:",obstSensorR)
+recule(my_marty,1)
+rotate(my_marty,-30)
+avance(my_marty,2)
 
 class MainWindow(QMainWindow):
     def __init__(self):
@@ -23,6 +35,8 @@ class MainWindow(QMainWindow):
 
     def the_button_was_clicked(self):
         print("Clicked!")
+        my_marty.stand_straight()
+        rotate(my_marty,45)
         obstacleL = my_marty.foot_obstacle_sensed('left')
         obstacleR = my_marty.foot_obstacle_sensed('right')
         obstSensorL = my_marty.get_obstacle_sensor_reading('left')

@@ -212,16 +212,16 @@ class MartyRobotController(QWidget):
     def keyPressEvent(self, event):
         if self.my_marty is not None:
             if event.key() == Qt.Key.Key_Z:
-                self.my_marty.walk(1)
+                movementDirection(self.my_marty,"forward")
                 print("walking forward")
             elif event.key() == Qt.Key.Key_S:
-                self.my_marty.walk(-1)
+                movementDirection(self.my_marty,"backwards")
                 print("walking backward")
             elif event.key() == Qt.Key.Key_Q:
-                self.my_marty.turn(-1)
+                movementDirection(self.my_marty,"left")
                 print("turning left")
             elif event.key() == Qt.Key.Key_D:
-                self.my_marty.turn(1)
+                movementDirection(self.my_marty,"right")
                 print("turning right")
             elif event.key() == Qt.Key.Key_1:
                 self.my_marty.celebrate()

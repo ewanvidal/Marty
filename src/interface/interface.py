@@ -213,6 +213,7 @@ class MartyRobotController(QWidget):
         if self.my_marty is not None:
             self.setFocusPolicy(Qt.FocusPolicy.StrongFocus)
             self.setFocus()
+            self.control_button.hide()
             self.isControlled = True
         else:
             print("No marty object available")
@@ -246,26 +247,24 @@ class MartyRobotController(QWidget):
                     print("celebration in progress !")
                 elif event.key() == Qt.Key.Key_2:
                     self.my_marty.dance()
-                    self.my_marty.disco_pattern()
                     print("dancing in progress !")
                 elif event.key() == Qt.Key.Key_3:
                     self.my_marty.circle_dance()
                     print("circle dancing in progress !")
                 elif event.key() == Qt.Key.Key_4:
                     self.my_marty.circle_dance()
-                    self.my_marty.disco_pattern()
                     print("circle dancing in progress !")
                 elif event.key() == Qt.Key.Key_5:
-                    self.my_marty.look_around()
-                    print("looking around")
+                    self.my_marty.kick('left', 180, 1000)
+                    print("kicking left leg")
                 elif event.key() == Qt.Key.Key_6:
-                    self.my_marty.lean("forward", 50, 500)
+                    self.my_marty.lean("forward", 100, 1000)
                     print("leaning forward")
                 elif event.key() == Qt.Key.Key_7:
-                    self.my_marty.arms(45)
+                    self.my_marty.arms(135, 0, 1000)
                     print("raising arms")
                 elif event.key() == Qt.Key.Key_Escape:
-                    self.my_marty.stop()
+                    self.my_marty.stop("pause")
                     print("stopping")
                 elif event.key() == Qt.Key.Key_L:
                     print("l")

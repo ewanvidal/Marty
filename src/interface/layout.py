@@ -9,17 +9,9 @@ from PyQt6.QtWidgets import QApplication, QLabel, QMainWindow, QTextEdit, QMenu,
 from application.deplacement import rotate
 
 (connecter,my_marty)=connexion(True)
-avance(my_marty,2)
 obstSensorL = my_marty.get_obstacle_sensor_reading('left')
 obstSensorR = my_marty.get_obstacle_sensor_reading('right')
 print("obstSensorL: ",obstSensorL,"  |  obstSensorR:",obstSensorR)
-rotate(my_marty,30)
-obstSensorL = my_marty.get_obstacle_sensor_reading('left')
-obstSensorR = my_marty.get_obstacle_sensor_reading('right')
-print("obstSensorL: ",obstSensorL,"  |  obstSensorR:",obstSensorR)
-recule(my_marty,1)
-rotate(my_marty,-30)
-avance(my_marty,2)
 
 class MainWindow(QMainWindow):
     def __init__(self):

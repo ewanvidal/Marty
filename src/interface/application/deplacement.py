@@ -51,7 +51,7 @@ def deplacement_couleur(couleur):
 
 def movementDirection(my_marty,movement):
     if movement == "forward" :
-        avance(my_marty,6)
+        avance(my_marty,2)
         return False
     elif movement == "left" :
         my_marty.sidestep('left', 5)

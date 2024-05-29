@@ -22,19 +22,19 @@ def getColorReadingRGB(my_marty):
     print(reading_red)
     print(reading_green)
     print(reading_blue)
-    if (reading_red > 63 and reading_red < 68) and (reading_green > 56 and reading_green < 62) and (reading_blue > 86 and reading_blue < 92) :
+    if (reading_red > 58 and reading_red < 68) and (reading_green > 45 and reading_green < 56) and (reading_blue > 55 and reading_blue < 65) :
         print("blue")
         return "blue"
-    elif (reading_red > 165 and reading_red < 171) and (reading_green > 25 and reading_green < 27.5) and (reading_blue > 39 and reading_blue < 42) :
+    elif (reading_red > 165 and reading_red < 182) and (reading_green > 22 and reading_green < 33) and (reading_blue > 25 and reading_blue < 36) :
         print("red")
         return "red"
-    elif (reading_red > 190 and reading_red < 198) and (reading_green > 93 and reading_green < 95) and (reading_blue > 65 and reading_blue < 68) :
+    elif (reading_red > 190 and reading_red < 210) and (reading_green > 85 and reading_green < 95) and (reading_blue > 45 and reading_blue < 57) :
         print("yellow")
         return "yellow"
-    elif (reading_red > 58 and reading_red < 62) and (reading_green > 41 and reading_green < 44.5) and (reading_blue > 32 and reading_blue < 36) :
+    elif (reading_red > 40 and reading_red < 48) and (reading_green > 29 and reading_green < 38) and (reading_blue > 15 and reading_blue < 25) :
         print("green")
         return "green"
-    elif (reading_red > 51 and reading_red < 57) and (reading_green > 25 and reading_green < 30) and (reading_blue > 44 and reading_blue < 49) :
+    elif (reading_red > 30 and reading_red < 46) and (reading_green > 14 and reading_green < 26) and (reading_blue > 15 and reading_blue < 29) :
         print("purple")
         return "purple"
     else :

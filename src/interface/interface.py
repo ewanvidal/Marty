@@ -8,6 +8,7 @@ from PyQt6.QtCore import Qt
 from PyQt6.QtGui import QIcon, QKeyEvent
 from application.connexion import connexion
 from application.labyrinthe import labyrintheColor
+from application.Calibrage import Calibrage
 
 
 class MartyRobotController(QWidget):
@@ -47,6 +48,136 @@ class MartyRobotController(QWidget):
         """)
         self.control_button.clicked.connect(self.controlClicked)
         self.control_button.hide()
+        
+        #create calibration button
+        self.calibrationButton = QPushButton("Calibrate")
+        self.calibrationButton.setStyleSheet("""
+            QPushButton {
+            background-color: blue;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px;
+            width: 200px;
+            font-size: 20px;
+            font-weight: bold;
+            }
+        """)
+        self.calibrationButton.clicked.connect(self.calibrationClicked)
+        self.calibrationButton.hide()
+        
+        #create red, green, blue, light blue, yellow, pink, black buttons
+        self.redButton = QPushButton("Red")
+        self.redButton.setStyleSheet("""
+            QPushButton {
+                background-color: red;
+                color: white;
+                border: none;
+                border-radius: 5px;
+                padding: 10px;
+                width: 200px;
+                font-size: 20px;
+                font-weight: bold;
+            }   
+        """)
+        self.redButton.clicked.connect(self.redClicked)
+        self.redButton.hide()
+        
+        self.greenButton = QPushButton("Green")
+        self.greenButton.setStyleSheet("""
+            QPushButton {
+                background-color: green;    
+                color: white;
+                border: none;
+                border-radius: 5px;
+                padding: 10px;
+                width: 200px;
+                font-size: 20px;
+                font-weight: bold;
+            }
+        """)
+        self.greenButton.clicked.connect(self.greenClicked)
+        self.greenButton.hide()
+        
+        self.blueButton = QPushButton("Blue")
+        self.blueButton.setStyleSheet("""
+            QPushButton {
+                background-color: blue;
+                color: white;
+                border: none;
+                border-radius: 5px;
+                padding: 10px;
+                width: 200px;
+                font-size: 20px;
+                font-weight: bold;
+            }
+        """)
+        self.blueButton.clicked.connect(self.blueClicked)
+        self.blueButton.hide()
+        
+        self.lightBlueButton = QPushButton("Light Blue")
+        self.lightBlueButton.setStyleSheet("""
+            QPushButton {
+                background-color: lightblue;
+                color: white;
+                border: none;
+                border-radius: 5px;
+                padding: 10px;
+                width: 200px;
+                font-size: 20px;
+                font-weight: bold;
+            }
+        """)
+        self.lightBlueButton.clicked.connect(self.lightBlueClicked)
+        self.lightBlueButton.hide()
+        
+        self.yellowButton = QPushButton("Yellow")
+        self.yellowButton.setStyleSheet("""
+            QPushButton {
+                background-color: yellow;
+                color: white;
+                border: none;
+                border-radius: 5px;
+                padding: 10px;
+                width: 200px;
+                font-size: 20px;
+                font-weight: bold;
+            }
+        """)
+        self.yellowButton.clicked.connect(self.yellowClicked)
+        self.yellowButton.hide()
+        
+        self.pinkButton = QPushButton("Pink")
+        self.pinkButton.setStyleSheet("""
+            QPushButton {
+                background-color: pink;
+                color: white;
+                border: none;
+                border-radius: 5px;
+                padding: 10px;
+                width: 200px;
+                font-size: 20px;
+                font-weight: bold;
+            }
+        """)
+        self.pinkButton.clicked.connect(self.pinkClicked)
+        self.pinkButton.hide()
+        
+        self.blackButton = QPushButton("Black")
+        self.blackButton.setStyleSheet("""
+            QPushButton {
+                background-color: black;
+                color: white;
+                border: none;
+                border-radius: 5px;
+                padding: 10px;
+                width: 200px;
+                font-size: 20px;
+                font-weight: bold;
+            }
+        """)
+        self.blackButton.clicked.connect(self.blackClicked)
+        self.blackButton.hide()
 
         #create loading screen
         self.loadingScreen = QLabel()
@@ -145,7 +276,15 @@ class MartyRobotController(QWidget):
         grid.addWidget(self.usbButton, 2, 0, 1, 1)
         grid.addWidget(self.wifiButton, 2, 1, 1, 1)   
         grid.addWidget(self.control_button, 0, 0, 1, 1)
+        grid.addWidget(self.calibrationButton, 0, 1, 1, 1)
         
+        grid.addWidget(self.redButton, 0, 0, 1, 1)
+        grid.addWidget(self.greenButton, 0, 1, 1, 1)
+        grid.addWidget(self.blueButton, 1, 0, 1, 1)
+        grid.addWidget(self.lightBlueButton, 1, 1, 1, 1)
+        grid.addWidget(self.yellowButton, 2, 0, 1, 1)
+        grid.addWidget(self.pinkButton, 2, 1, 1, 1)
+        grid.addWidget(self.blackButton, 3, 0, 1, 1)
 
         self.setLayout(grid)
 
@@ -202,6 +341,7 @@ class MartyRobotController(QWidget):
         self.wifiButton.show()
         self.mainTitle.show()
         self.control_button.show()
+        self.calibrationButton.show()
         self.isControlled = False
         
     def controlClicked(self):
@@ -218,6 +358,32 @@ class MartyRobotController(QWidget):
             self.setFocus()
             self.control_button.hide()
             self.isControlled = True
+        else:
+            print("No marty object available")
+            self.homeClicked()
+            
+    def calibrationClicked(self):
+        vbox = self.layout()
+        for i in range(vbox.count()): 
+            widget = vbox.itemAt(i).widget()
+            if widget is not None:
+                widget.hide()
+        self.calibrationButton.show()
+        self.homeButton.show()
+        self.my_marty = self.getMyMarty()
+        if self.my_marty is not None:
+            self.setFocusPolicy(Qt.FocusPolicy.StrongFocus)
+            self.setFocus()
+            self.calibrationButton.hide()
+            self.isControlled = True
+            
+            self.redButton.show()
+            self.greenButton.show() 
+            self.blueButton.show()
+            self.lightBlueButton.show()
+            self.yellowButton.show()
+            self.pinkButton.show()
+            self.blackButton.show()
         else:
             print("No marty object available")
             self.homeClicked()
@@ -280,6 +446,28 @@ class MartyRobotController(QWidget):
             else:
                 print("No marty object available")
     
+    
+    def redClicked(self):
+        Calibrage(self.my_marty,"red")
+    
+    def greenClicked(self):
+        Calibrage(self.my_marty,"green")
+        
+    def blueClicked(self):
+        Calibrage(self.my_marty,"blue")
+        
+    def lightBlueClicked(self):
+        Calibrage(self.my_marty,"lightblue")
+        
+    def yellowClicked(self):
+        Calibrage(self.my_marty,"yellow")
+        
+    def pinkClicked(self):
+        Calibrage(self.my_marty,"pink")
+        
+    def blackClicked(self):
+        Calibrage(self.my_marty,"black")
+        
     
 if __name__ == "__main__":
     app = QApplication(sys.argv)

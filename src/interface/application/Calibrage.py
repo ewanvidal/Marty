@@ -1,36 +1,51 @@
 import os
 
-premiereFois=True
-dicoCouleur={}
+premiereFois = True
+dicoCouleur = {}
 
 def getCouleurCalibrage(color):
-    if (premiereFois):
+    global premiereFois
+    if premiereFois:
         dossier = os.path.dirname(__file__)
         chemin_fichier = os.path.join(dossier, "Calibrage.txt")
-        fichier=open(chemin_fichier,"r")
+        with open(chemin_fichier, "r", encoding='utf-8') as fichier:
+            for ligne in fichier:
+                ligneSplit = ligne.split()
+                if len(ligneSplit) == 4:
+                    dicoCouleur[ligneSplit[0]] = (float(ligneSplit[1]), float(ligneSplit[2]), float(ligneSplit[3]))
+        premiereFois = False
 
-        for ligne in fichier: 
-            ligneSplit=ligne.split()
-            dicoCouleur[ligneSplit[0]]=(int(ligneSplit[1]),int(ligneSplit[2]),int(ligneSplit[3]))
     if color in dicoCouleur:
         return dicoCouleur[color]
-    else :
+    else:
         print("Couleur non valide")
 
-def Calibrage(my_marty,color):
+def Calibrage(my_marty, color):
     dossier = os.path.dirname(__file__)
     chemin_fichier = os.path.join(dossier, "Calibrage.txt")
-    fichierLecture=open(chemin_fichier,"r")
-    position=-1
-    for i in range(len(fichierLecture)):
-        for mot in fichierLecture[i].split():
-            if mot==color:
-                position=i
-    lignes=fichierLecture.readlines()
+    
+    with open(chemin_fichier, "r", encoding='utf-8') as fichierLecture:
+        lignes = fichierLecture.readlines()
+
+    position = -1
+    for i, ligne in enumerate(lignes):
+        if ligne.startswith(color):
+            position = i
+            break
+
     reading_red = my_marty.get_color_sensor_value_by_channel("left", "red")
     reading_green = my_marty.get_color_sensor_value_by_channel("left", "green")
     reading_blue = my_marty.get_color_sensor_value_by_channel("left", "blue")
-    lignes[position]=(color," ",reading_red," ", reading_green," ",reading_blue,"\n")
-    fichier=open(chemin_fichier,"w")
-    fichier.writelines(lignes)
-    
+
+    if position != -1:
+        lignes[position] = f"{color} {reading_red} {reading_green} {reading_blue}\n"
+    else:
+        lignes.append(f"{color} {reading_red} {reading_green} {reading_blue}\n")
+
+    with open(chemin_fichier, "w", encoding='utf-8') as fichier:
+        fichier.writelines(lignes)
+
+    with open(chemin_fichier, "r", encoding='utf-8') as fichier:
+        print(fichier.read())
+
+

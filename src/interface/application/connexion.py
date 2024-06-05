@@ -1,5 +1,5 @@
 from martypy import Marty
-def connexion(connexionWifi=True, ip_adress="192.168.0.115"):
+def connexion(connexionWifi=True, ip_adress="192.168.116.170"):
     if connexionWifi:
         try:
             my_marty = Marty("wifi", ip_adress)

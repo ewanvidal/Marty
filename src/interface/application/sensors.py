@@ -37,19 +37,20 @@ def getColorReadingRGB(my_marty):
     elif (reading_red > (yellow_tab[0] - 10) and reading_red < (yellow_tab[0]+ 10)) and (reading_green > (yellow_tab[1] - 10) and reading_green < (yellow_tab[1] + 10)) and (reading_blue > (yellow_tab[2] - 10) and reading_blue < (yellow_tab[2] + 10)) :
         print("yellow")
         return "yellow"
-    elif (reading_red > (green_tab[0] - 10) and reading_red < (green_tab[0]+ 10)) and (reading_green > (green_tab[0] - 10) and reading_green < (green_tab[1] + 10)) and (reading_blue > (green_tab[2] - 10) and reading_blue < (green_tab[2] + 10)) :
+    elif (reading_red > (green_tab[0] - 10) and reading_red < (green_tab[0]+ 10)) and (reading_green > (green_tab[1] - 10) and reading_green < (green_tab[1] + 10)) and (reading_blue > (green_tab[2] - 10) and reading_blue < (green_tab[2] + 10)) :
         print("green")
         return "green"
-    elif (reading_red > (pink_tab[0] - 10) and reading_red < (pink_tab[0]+ 10)) and (reading_green > (pink_tab[0] - 10) and reading_green < (pink_tab[1] + 10)) and (reading_blue > (pink_tab[2] - 10) and reading_blue < (pink_tab[2] + 10)) :
+    elif (reading_red > (pink_tab[0] - 10) and reading_red < (pink_tab[0]+ 10)) and (reading_green > (pink_tab[1] - 10) and reading_green < (pink_tab[1] + 10)) and (reading_blue > (pink_tab[2] - 10) and reading_blue < (pink_tab[2] + 10)) :
         print("pink")
         return "pink"
-    elif (reading_red > (lightblue_tab[0] - 10) and reading_red < (lightblue_tab[0]+ 10)) and (reading_green > (lightblue_tab[0] - 10) and reading_green < (lightblue_tab[1] + 10)) and (reading_blue > (lightblue_tab[2] - 10) and reading_blue < (lightblue_tab[2] + 10)) :
+    elif (reading_red > (lightblue_tab[0] - 10) and reading_red < (lightblue_tab[0]+ 10)) and (reading_green > (lightblue_tab[1] - 10) and reading_green < (lightblue_tab[1] + 10)) and (reading_blue > (lightblue_tab[2] - 10) and reading_blue < (lightblue_tab[2] + 10)) :
         print("lightblue")
         return "lightblue"
-    elif (reading_red > (black_tab[0] - 10) and reading_red < (black_tab[0]+ 10)) and (reading_green > (black_tab[0] - 10) and reading_green < (black_tab[1] + 10)) and (reading_blue > (black_tab[2] - 10) and reading_blue < (black_tab[2] + 10)) :
+    elif (reading_red > (black_tab[0] - 10) and reading_red < (black_tab[0]+ 10)) and (reading_green > (black_tab[1] - 10) and reading_green < (black_tab[1] + 10)) and (reading_blue > (black_tab[2] - 10) and reading_blue < (black_tab[2] + 10)) :
         print("black")
         return "black"
     else :
+        print(reading_red,reading_green,reading_blue)
         print("Demandez aux développeurs d'ajouter cette couleur dans la base de données")
     
 

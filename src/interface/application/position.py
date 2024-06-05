@@ -8,13 +8,14 @@ class Position:
     def getCurrentPosition(self):
         return(self.x,self.y)
     def updatePosition(self,deplacement):
-        if deplacement=="forward":
+        self.updateTableau(deplacement)
+        if deplacement=="green":
             self.x+=1
-        elif deplacement=="backward":
+        elif deplacement=="yellow":
             self.x+=-1
-        elif deplacement=="right":
+        elif deplacement=="pink":
             self.y+=1
-        elif deplacement=="left":
+        elif deplacement=="blue":
             self.y+=-1
     def updateTableau(self,color):
         (x,y)=self.getCurrentPosition()

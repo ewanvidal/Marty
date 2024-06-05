@@ -335,12 +335,12 @@ class MartyRobotController(QWidget):
             if (connecter):
                 print("le robot est connecté")
                 self.my_marty = my_marty
-                self.my_marty.play_mp3("src\sounds\Connect.mp3")
+                #self.my_marty.play_mp3("src\sounds\Connect.mp3")
         else:
             (connecter,my_marty)=connexion(True, self.ipAddress.text())
             if (connecter):
                 print("le robot est connecté")
-                self.my_marty.play_mp3("sounds/Connect.mp3")
+                #self.my_marty.play_mp3("sounds/Connect.mp3")
                 self.my_marty = my_marty
             
     def getMyMarty(self):
@@ -385,9 +385,10 @@ class MartyRobotController(QWidget):
             if widget is not None:
                 widget.hide()
         self.calibrationButton.show()
-        self.homeButton.show()
+        
         self.my_marty = self.getMyMarty()
         if self.my_marty is not None:
+            self.homeButton.show()
             self.setFocusPolicy(Qt.FocusPolicy.StrongFocus)
             self.setFocus()
             self.calibrationButton.hide()

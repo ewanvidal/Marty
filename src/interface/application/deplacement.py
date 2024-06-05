@@ -34,16 +34,20 @@ def recule(my_marty,distance):
     my_marty.stand_straight()
 
 def deplacement_couleur(couleur):
-    if (couleur in ["green","yellow","blue","red","purple"]):
+    if (couleur in ["green","yellow","blue","red","pink", "lightblue", "black"]):
         if (couleur=="green"):
             return "forward"
-        if (couleur=="blue"):
+        elif (couleur=="blue"):
             return "left"
-        if (couleur=="purple"):
+        elif (couleur=="pink"):
             return "right"
-        if (couleur=="yellow"):
+        elif (couleur=="yellow"):
             return "backwards"
-        if (couleur=="red"):
+        elif (couleur=="red"):
+            return "center"
+        elif (couleur=="lightblue"):
+            return "center"
+        elif (couleur=="black"):
             return "center"
     else :
         print(couleur)

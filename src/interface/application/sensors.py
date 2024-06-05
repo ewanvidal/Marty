@@ -1,4 +1,6 @@
 from martypy import Marty
+from application.Calibrage import *
+
 
 def getColorReading(my_marty):
     reading = my_marty.get_ground_sensor_reading("left")
@@ -19,24 +21,34 @@ def getColorReadingRGB(my_marty):
     reading_red = my_marty.get_color_sensor_value_by_channel("left", "red")
     reading_blue = my_marty.get_color_sensor_value_by_channel("left", "blue")
     reading_green = my_marty.get_color_sensor_value_by_channel("left", "green")
-    print(reading_red)
-    print(reading_green)
-    print(reading_blue)
-    if (reading_red > 58 and reading_red < 68) and (reading_green > 45 and reading_green < 56) and (reading_blue > 55 and reading_blue < 65) :
+    blue_tab = getCouleurCalibrage("blue")
+    red_tab = getCouleurCalibrage("red")
+    yellow_tab = getCouleurCalibrage("yellow")
+    green_tab = getCouleurCalibrage("green")
+    pink_tab = getCouleurCalibrage("pink")
+    lightblue_tab = getCouleurCalibrage("lightblue")
+    black_tab = getCouleurCalibrage("black")
+    if (reading_red > (blue_tab[0] - 10) and reading_red < (blue_tab[0] + 10)) and (reading_green > (blue_tab[1] - 10) and reading_green < (blue_tab[1] + 10)) and (reading_blue > (blue_tab[2] - 10) and reading_blue < (blue_tab[2] + 10)) :
         print("blue")
         return "blue"
-    elif (reading_red > 165 and reading_red < 182) and (reading_green > 22 and reading_green < 33) and (reading_blue > 25 and reading_blue < 36) :
+    elif (reading_red > (red_tab[0] - 10) and reading_red < (red_tab[0] + 10)) and (reading_green > (red_tab[1] - 10) and reading_green < (red_tab[1] + 10)) and (reading_blue > (red_tab[2] - 10) and reading_blue < (red_tab[2] + 10)) :
         print("red")
         return "red"
-    elif (reading_red > 190 and reading_red < 210) and (reading_green > 85 and reading_green < 95) and (reading_blue > 45 and reading_blue < 57) :
+    elif (reading_red > (yellow_tab[0] - 10) and reading_red < (yellow_tab[0]+ 10)) and (reading_green > (yellow_tab[1] - 10) and reading_green < (yellow_tab[1] + 10)) and (reading_blue > (yellow_tab[2] - 10) and reading_blue < (yellow_tab[2] + 10)) :
         print("yellow")
         return "yellow"
-    elif (reading_red > 40 and reading_red < 48) and (reading_green > 29 and reading_green < 38) and (reading_blue > 15 and reading_blue < 25) :
+    elif (reading_red > (green_tab[0] - 10) and reading_red < (green_tab[0]+ 10)) and (reading_green > (green_tab[0] - 10) and reading_green < (green_tab[1] + 10)) and (reading_blue > (green_tab[2] - 10) and reading_blue < (green_tab[2] + 10)) :
         print("green")
         return "green"
-    elif (reading_red > 30 and reading_red < 46) and (reading_green > 14 and reading_green < 26) and (reading_blue > 15 and reading_blue < 29) :
-        print("purple")
-        return "purple"
+    elif (reading_red > (pink_tab[0] - 10) and reading_red < (pink_tab[0]+ 10)) and (reading_green > (pink_tab[0] - 10) and reading_green < (pink_tab[1] + 10)) and (reading_blue > (pink_tab[2] - 10) and reading_blue < (pink_tab[2] + 10)) :
+        print("pink")
+        return "pink"
+    elif (reading_red > (lightblue_tab[0] - 10) and reading_red < (lightblue_tab[0]+ 10)) and (reading_green > (lightblue_tab[0] - 10) and reading_green < (lightblue_tab[1] + 10)) and (reading_blue > (lightblue_tab[2] - 10) and reading_blue < (lightblue_tab[2] + 10)) :
+        print("lightblue")
+        return "lightblue"
+    elif (reading_red > (black_tab[0] - 10) and reading_red < (black_tab[0]+ 10)) and (reading_green > (black_tab[0] - 10) and reading_green < (black_tab[1] + 10)) and (reading_blue > (black_tab[2] - 10) and reading_blue < (black_tab[2] + 10)) :
+        print("black")
+        return "black"
     else :
         print("Demandez aux développeurs d'ajouter cette couleur dans la base de données")
     

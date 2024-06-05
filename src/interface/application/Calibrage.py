@@ -13,4 +13,4 @@ def getCouleurCalibrage(color):
             ligneSplit=ligne.split()
             
 
-getCouleurCalibrage("")
+getCouleurCalibrage("blue")

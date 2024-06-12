@@ -12,10 +12,12 @@ from deplacement import avance,rotate,recule
 
 # ----------------------------------------------------------
 # Fonction : Main
-# Description :
+# Description : Fonction main utilisée principalement au début 
+# du projet pour découvrir le fonctionnement de marty, ici, on 
+# teste la fonction connexion et avance de marty 
 # ----------------------------------------------------------
 
-def main(): #Teste la fonction connexion et avance de marty 
+def main():
     
     (connecter,my_marty)=connexion(True)
     if(connecter):print("le robot est connecté")

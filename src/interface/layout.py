@@ -23,8 +23,8 @@ obstSensorR = my_marty.get_obstacle_sensor_reading('right')
 print("obstSensorL: ",obstSensorL,"  |  obstSensorR:",obstSensorR)
 
 # ----------------------------------------------------------
-# Classe : 
-# Description :
+# Classe : MainWindow 
+# Description : Classe pour tester les couleurs RGB et au début du projet
 # ----------------------------------------------------------
 
 class MainWindow(QMainWindow):
@@ -40,8 +40,8 @@ class MainWindow(QMainWindow):
         self.setCentralWidget(button)
 
     # ----------------------------------------------------------
-    # Fonction : 
-    # Description :
+    # Fonction : Le bouton a  été clické
+    # Description : Bouton qui permet de récupérer nos valeurs après le click
     # ----------------------------------------------------------
 
     def the_button_was_clicked(self):

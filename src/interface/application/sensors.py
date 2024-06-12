@@ -10,8 +10,9 @@ from martypy import Marty
 from application.Calibrage import *
 
 # ----------------------------------------------------------
-# Fonction : 
-# Description :
+# Fonction : getColorReading
+# Description : 1ère version de l'obtention des valeurs données 
+# par le capteur de couleur, renvoie la couleur en str
 # ----------------------------------------------------------
 
 def getColorReading(my_marty):
@@ -30,8 +31,9 @@ def getColorReading(my_marty):
         print("Demandez aux développeurs d'ajouter cette couleur dans la base de données")
 
 # ----------------------------------------------------------
-# Fonction : 
-# Description :
+# Fonction : getColorReadingRGB
+# Description : Permet de comparer la valeur RGB obtenue avec 
+# les valeurs qui se situent dans les fichiers de callibrage 1 ou 2 selon le robot
 # ----------------------------------------------------------
 
 def getColorReadingRGB(my_marty,numero):
@@ -72,8 +74,8 @@ def getColorReadingRGB(my_marty,numero):
         return "yellow"
     
 # ----------------------------------------------------------
-# Fonction : 
-# Description :
+# Fonction : getObstacleLeft
+# Description : Renvoie le fait que le robot détecte un obstacle à gauche
 # ----------------------------------------------------------
 
 def getObstacleLeft(my_marty):
@@ -82,8 +84,8 @@ def getObstacleLeft(my_marty):
 
 
 # ----------------------------------------------------------
-# Fonction : 
-# Description :
+# Fonction : getObstacleRight
+# Description : Renvoie le fait que le robot détecte un obstacle à droite
 # ----------------------------------------------------------
 
 def getObstacleRight(my_marty):
@@ -91,8 +93,8 @@ def getObstacleRight(my_marty):
     return obstacleR
 
 # ----------------------------------------------------------
-# Fonction : 
-# Description :
+# Fonction : getGroundRight 
+# Description : Renvoie la vaeur donnée par le capteur de sol à droite 
 # ----------------------------------------------------------
 
 def getGroundRight(my_marty):
@@ -100,8 +102,8 @@ def getGroundRight(my_marty):
     return onGroundR
 
 # ----------------------------------------------------------
-# Fonction : 
-# Description :
+# Fonction : getGroundLeft
+# Description : Renvoie la vaeur donnée par le capteur de sol à gauche 
 # ----------------------------------------------------------
 
 def getGroundLeft(my_marty):
@@ -109,8 +111,8 @@ def getGroundLeft(my_marty):
     return onGroundL
 
 # ----------------------------------------------------------
-# Fonction : 
-# Description :
+# Fonction : getDistRight
+# Description : Renvoie la distance mesurée par le capteur à droite
 # ----------------------------------------------------------
 
 def getDistRight(my_marty) :
@@ -118,8 +120,8 @@ def getDistRight(my_marty) :
     return distR
 
 # ----------------------------------------------------------
-# Fonction : 
-# Description :
+# Fonction : getDistLeft
+# Description : Renvoie la distance mesurée par le capteur à gauche
 # ----------------------------------------------------------
 
 def getDistLeft(my_marty) :

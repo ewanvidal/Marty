@@ -9,8 +9,10 @@
 from martypy import Marty
 
 # ----------------------------------------------------------
-# Fonction : 
-# Description :
+# Fonction : Connexion
+# Description : Essaye d connecter Marty via USB et prends
+# en paramètres l'adresse IP puis essaye de se connecter avec 
+# celle-ci
 # ----------------------------------------------------------
 
 def connexion(connexionWifi=True, ip_adress="192.168.116.149"):

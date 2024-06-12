@@ -34,7 +34,7 @@ def getColorReadingRGB(my_marty):
     elif (reading_red > (red_tab[0] - 10) and reading_red < (red_tab[0] + 10)) and (reading_green > (red_tab[1] - 10) and reading_green < (red_tab[1] + 10)) and (reading_blue > (red_tab[2] - 10) and reading_blue < (red_tab[2] + 10)) :
         print("red")
         return "red"
-    elif (reading_red > (yellow_tab[0] - 10) and reading_red < (yellow_tab[0]+ 10)) and (reading_green > (yellow_tab[1] - 10) and reading_green < (yellow_tab[1] + 10)) and (reading_blue > (yellow_tab[2] - 10) and reading_blue < (yellow_tab[2] + 10)) :
+    elif (reading_red > (yellow_tab[0] - 20) and reading_red < (yellow_tab[0]+ 20)) and (reading_green > (yellow_tab[1] - 20) and reading_green < (yellow_tab[1] + 20)) and (reading_blue > (yellow_tab[2] - 20) and reading_blue < (yellow_tab[2] + 20)) :
         print("yellow")
         return "yellow"
     elif (reading_red > (green_tab[0] - 10) and reading_red < (green_tab[0]+ 10)) and (reading_green > (green_tab[1] - 10) and reading_green < (green_tab[1] + 10)) and (reading_blue > (green_tab[2] - 10) and reading_blue < (green_tab[2] + 10)) :

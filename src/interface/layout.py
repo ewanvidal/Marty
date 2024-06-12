@@ -2,6 +2,7 @@ import sys
 
 from application.connexion import *
 from application.deplacement import *
+from application.sensors import getColorReadingRGB
 
 from PyQt6.QtCore import Qt
 from PyQt6.QtGui import QAction
@@ -32,10 +33,7 @@ class MainWindow(QMainWindow):
         #obstSensorL = my_marty.get_obstacle_sensor_reading('left')
         #obstSensorR = my_marty.get_obstacle_sensor_reading('right')
         #print("ObstacleL: ",obstacleL,"  |  ObstacleR:",obstacleR,"  |  ","obstSensorL: ",obstSensorL,"  |  obstSensorR:",obstSensorR)
-        print(my_marty.get_ground_sensor_reading('LeftColorSensor'))
-        print("Red : " + str(my_marty.get_color_sensor_value_by_channel("left", "red")))
-        print("Green : " + str(my_marty.get_color_sensor_value_by_channel("left", "green")))
-        print("Blue : " + str(my_marty.get_color_sensor_value_by_channel("left", "blue")))
+        print(getColorReadingRGB(my_marty))
         
 
 

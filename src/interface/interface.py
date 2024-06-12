@@ -38,6 +38,8 @@ class MartyRobotController(QWidget):
         self.my_marty2 = None
         self.currentRobot = None
         self.tableau = [] 
+        self.battery1 = 0
+        self.battery2 = 0
 
         grid = QGridLayout()
 
@@ -209,6 +211,40 @@ class MartyRobotController(QWidget):
         grid.addWidget(self.loadingScreen, 1, 0, 1, 2)
         self.loadingScreen.hide()
 
+        #create battery bar for first robot
+        self.batteryBar1 = QProgressBar()
+        self.batteryBar1.setRange(0, 100)
+        self.batteryBar1.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.batteryBar1.setStyleSheet("""
+            QProgressBar {
+                border: 2px solid grey; 
+                border-radius: 5px;
+                text-align: center;
+            }
+            QProgressBar::chunk {
+                background-color: #05B8CC;
+                width: 10px;
+            }
+        """)
+        self.batteryBar1.hide()
+        
+        #create battery bar for second robot
+        self.batteryBar2 = QProgressBar()
+        self.batteryBar2.setRange(0, 100)
+        self.batteryBar2.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.batteryBar2.setStyleSheet("""
+            QProgressBar {
+                border: 2px solid grey;
+                border-radius: 5px;
+                text-align: center;
+            }
+            QProgressBar::chunk {
+                background-color: #05B8CC;
+                width: 10px;
+            }
+        """)
+        self.batteryBar2.hide()
+
         #create input for IP address
         self.ipAddress = QLineEdit()
         self.ipAddress.setPlaceholderText("Enter IP Address")
@@ -376,6 +412,9 @@ class MartyRobotController(QWidget):
         grid.addWidget(self.secondRobot, 2, 1, 1, 1)
         grid.addWidget(self.sentence, 1, 0, 1, 2)
         grid.addWidget(self.labyrintheButton, 0, 0, 1, 1)
+        
+        grid.addWidget(self.batteryBar1, 3, 0, 1, 2)
+        grid.addWidget(self.batteryBar2, 4, 0, 1, 2)
 
         self.setLayout(grid)
 
@@ -415,10 +454,15 @@ class MartyRobotController(QWidget):
                     print("le deuxième robot est connecté")
                     self.my_marty2 = my_marty
                     #self.my_marty.play_mp3("src\sounds\Connect.mp3")
+                    self.battery2 = self.my_marty2.get_battery_remaining()
+                    self.batteryBar2.setValue(self.battery2)
+                    
                 if (self.my_marty is None):
                     print("le premier robot est connecté")
                     self.my_marty = my_marty
                     #self.my_marty.play_mp3("src\sounds\Connect.mp3")
+                    self.battery1 = self.my_marty.get_battery_remaining()
+                    self.batteryBar1.setValue(self.battery1)
         else:
             (connecter,my_marty)=connexion(True, self.ipAddress.text())
             if (connecter):
@@ -426,10 +470,16 @@ class MartyRobotController(QWidget):
                     print("le deuxième robot est connecté")
                     self.my_marty2 = my_marty
                     #self.my_marty.play_mp3("src\sounds\Connect.mp3")
+                    self.battery2 = self.my_marty2.get_battery_remaining()
+                    self.batteryBar2.setValue(self.battery2)
+                    self.batteryBar2.show()
                 if (self.my_marty is None):
                     print("le premier robot est connecté")
                     self.my_marty = my_marty
                     #self.my_marty.play_mp3("src\sounds\Connect.mp3")
+                    self.battery1 = self.my_marty.get_battery_remaining()
+                    self.batteryBar1.setValue(self.battery1)
+                    self.batteryBar1.show()
             
     def getMyMarty(self):
         return self.my_marty
@@ -447,7 +497,10 @@ class MartyRobotController(QWidget):
         self.control_button.show()
         self.calibrationButton.show()
         self.isControlled = False
-         
+        
+        self.batteryBar1.setValue(self.battery1)
+        self.batteryBar2.setValue(self.battery2)
+
     def firstRobotClicked(self):
         self.firstRobot.setStyleSheet("""
             QPushButton {

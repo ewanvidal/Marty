@@ -5,7 +5,7 @@ class Position:
         self.nom=nom
         self.x=0
         self.y=2
-        self.tableau = [["Black"] * taille_tableau for _ in range(taille_tableau)]
+        self.tableau = [["black"] * taille_tableau for _ in range(taille_tableau)]
 
     def getCurrentPosition(self):
         return(self.x,self.y)
@@ -27,7 +27,8 @@ class Position:
     
     def updateTableau(self,color):
         (x,y)=self.getCurrentPosition()
-        self.tableau[x][y]=color
+        if color!="black":
+            self.tableau[x][y]=color
     def getTableau(self):
         return self.tableau
     def getEnd(self):

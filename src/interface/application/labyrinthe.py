@@ -26,7 +26,7 @@ def updatePosition(deplacement,x,y):
     elif deplacement=="blue":
         return(x,y+1)
                 
-def getLabyrintheColor(my_marty1):
+def getLabyrintheColor(my_marty1,my_marty2):
     #(connecter1,my_marty2)=connexion(True,"192.168.0.101")
     #(connecter2,my_marty2)=connexion(True,"192.168.0.10")
     connecter2=True
@@ -66,46 +66,46 @@ def getLabyrintheColor(my_marty1):
     print("Est ce que le deuxième robot est prêt à partir ?")
     go= input()
     if (go!="non"):
-        color = getColorReadingRGB(my_marty1)
+        color = getColorReadingRGB(my_marty2)
         if tableau[0][2]=="black" and color!="black":
             tableau[0][2]=color
-        movementDirection(my_marty1,"forward")
-        color = getColorReadingRGB(my_marty1)        
+        movementDirection(my_marty2,"forward")
+        color = getColorReadingRGB(my_marty2)        
         if tableau[1][2]=="black" and color!="black":
             tableau[1][2]=color
-        movementDirection(my_marty1,"forward")
-        color = getColorReadingRGB(my_marty1)
+        movementDirection(my_marty2,"forward")
+        color = getColorReadingRGB(my_marty2)
         if tableau[2][2]=="black" and color!="black":
             tableau[2][2]=color
-        movementDirection(my_marty1,"left")
-        color = getColorReadingRGB(my_marty1)
+        movementDirection(my_marty2,"left")
+        color = getColorReadingRGB(my_marty2)
         if tableau[2][1]=="black" and color!="black":
             tableau[2][1]=color
-        movementDirection(my_marty1,"backwards")
-        color = getColorReadingRGB(my_marty1)
+        movementDirection(my_marty2,"backwards")
+        color = getColorReadingRGB(my_marty2)
         if tableau[1][1]=="black" and color!="black":
             tableau[1][1]=color
-        movementDirection(my_marty1,"backwards")
-        color = getColorReadingRGB(my_marty1)
+        movementDirection(my_marty2,"backwards")
+        color = getColorReadingRGB(my_marty2)
         if tableau[0][1]=="black" and color!="black":
             tableau[0][1]=color
-        movementDirection(my_marty1,"left")
-        color = getColorReadingRGB(my_marty1)
+        movementDirection(my_marty2,"left")
+        color = getColorReadingRGB(my_marty2)
         if tableau[0][0]=="black" and color!="black":
             tableau[0][0]=color
-        movementDirection(my_marty1,"forward")
-        color = getColorReadingRGB(my_marty1)
+        movementDirection(my_marty2,"forward")
+        color = getColorReadingRGB(my_marty2)
         if tableau[1][0]=="black" and color!="black":
             tableau[1][0]=color
-        movementDirection(my_marty1,"forward")
-        color = getColorReadingRGB(my_marty1)
+        movementDirection(my_marty2,"forward")
+        color = getColorReadingRGB(my_marty2)
         if tableau[2][0]=="black" and color!="black":
             tableau[2][0]=color
         for i in range(3):
             print(tableau[i])
     return tableau
 
-def executeLabyrinthe(my_marty1,tableau):
+def executeLabyrinthe(my_marty,tableau):
     print("Est ce que le robot est sur la case de départ ?")
     go= input()
     if go=="non":return 0
@@ -117,5 +117,5 @@ def executeLabyrinthe(my_marty1,tableau):
             print(color,x,y)
             x,y=updatePosition(color,x,y)
             movement = deplacement_couleur(color)
-            movementDirection(my_marty1,movement)
-    my_marty1.celebrate()
+            movementDirection(my_marty,movement)
+    my_marty.celebrate()

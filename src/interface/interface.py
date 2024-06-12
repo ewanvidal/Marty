@@ -495,14 +495,14 @@ class MartyRobotController(QWidget):
             widget = vbox.itemAt(i).widget()
             if widget is not None:
                 widget.hide()
-                
-        self.control_button.hide()
-        self.firstRobot.show()
-        self.secondRobot.show()
-        self.sentence.show()
-        self.homeButton.show()
         
-        if self.my_marty is not None or self.my_marty2 is None:
+        if self.my_marty is not None or self.my_marty2 is not None:  
+            self.control_button.hide()
+            self.firstRobot.show()
+            self.secondRobot.show()
+            self.sentence.show()
+            self.homeButton.show()
+        
             self.setFocusPolicy(Qt.FocusPolicy.StrongFocus)
             self.setFocus()
             self.control_button.hide()
@@ -539,7 +539,7 @@ class MartyRobotController(QWidget):
 
     def keyPressEvent(self, event):
         if self.isControlled:
-            if self.my_marty is not None or self.my_marty2 is not None:
+            if self.currentRobot is not None:
                 #basic movement
                 if event.key() == Qt.Key.Key_Z:
                     movementDirection(self.currentRobot,"forward")
@@ -593,7 +593,7 @@ class MartyRobotController(QWidget):
                 else:
                     print("Key not recognized")
             else:
-                print("No marty object available")
+                print("Please select a robot to control")
     
     
     def redClicked(self):

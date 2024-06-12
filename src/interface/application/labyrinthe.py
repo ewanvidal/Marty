@@ -1,5 +1,5 @@
 #from connexion import connexion
-from application.deplacement import avance,rotate,recule,retourner,deplacement_couleur,movementDirection
+from application.deplacement import avance,recule,deplacement_couleur,movementDirection
 from application.emotion import regard,danse,celebre
 from application.sensors import getColorReading,getObstacleLeft,getObstacleRight,getGroundRight,getGroundLeft,getDistRight,getDistLeft, getColorReadingRGB
 from time import *

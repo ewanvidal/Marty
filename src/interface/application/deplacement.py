@@ -6,7 +6,7 @@ def avance(my_marty,distance):
         groundSensorL = my_marty.get_ground_sensor_reading('left')
         groundSensorR = my_marty.get_ground_sensor_reading('right')
         if (groundSensorL>10 and groundSensorR>30 and not(obstacleL) and not(obstacleR)):
-            my_marty.walk(1,'auto',0,25,2500,None)
+            my_marty.walk(1,'auto',0,25,1500,None)
   
 def rotate(my_marty,angle):
    
@@ -25,7 +25,7 @@ def rotate(my_marty,angle):
 def retourner(my_marty):
    rotate(my_marty,180)
 def recule(my_marty,distance):
-    my_marty.walk(distance,'auto',0,-25,2500,None)
+    my_marty.walk(distance,'auto',0,-25,1500,None)
 
 def deplacement_couleur(couleur):
     if (couleur in ["green","yellow","blue","red","pink", "lightblue", "black"]):
@@ -52,10 +52,10 @@ def movementDirection(my_marty,movement):
         avance(my_marty,6)
         return False
     elif movement == "left" :
-        my_marty.sidestep('left', 6, 25, 2000)
+        my_marty.sidestep('left', 6)
         return False
     elif movement == "right" :
-        my_marty.sidestep('right', 6, 25, 2000)
+        my_marty.sidestep('right', 6)
         return False
     elif movement == "backwards" :
         recule(my_marty,6)

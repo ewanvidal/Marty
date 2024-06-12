@@ -588,7 +588,8 @@ class MartyRobotController(QWidget):
                     print("stopping")
                 elif event.key() == Qt.Key.Key_L:
                     print("l")
-                    tableau=getLabyrintheColor(self.currentRobot)
+                    #tableau=getLabyrintheColor(self.currentRobot)
+                    tableau=[['lightblue', 'blue', 'green'],['blue', 'yellow', 'green'],['red', 'pink', 'pink']]
                     executeLabyrinthe(self.currentRobot,tableau)
                     print("labyrinthe")
                 else:

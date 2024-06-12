@@ -17,15 +17,14 @@ def getStart(tableau):
             if tableau[i][j]=="lightblue":
                 return (i,j)
 def updatePosition(deplacement,x,y):
-    if (deplacement=="green" or deplacement=="ligtblue"):
-        x+=1
+    if (deplacement=="green" or deplacement=="lightblue"):
+        return(x+1,y)
     elif deplacement=="yellow":
-        x+=-1
+        return(x-1,y)
     elif deplacement=="pink":
-        y+=1
+        return(x,y-1)
     elif deplacement=="blue":
-        y+=-1
-    return (x,y)
+        return(x,y+1)
                 
 def getLabyrintheColor(my_marty1):
     #(connecter1,my_marty2)=connexion(True,"192.168.0.101")
@@ -109,12 +108,14 @@ def getLabyrintheColor(my_marty1):
 def executeLabyrinthe(my_marty1,tableau):
     print("Est ce que le robot est sur la case de départ ?")
     go= input()
+    if go=="non":return 0
     debut=getStart(tableau)
     fin =getEnd(tableau)
     x,y=debut
     while ((x,y)!=fin):
             color=tableau[x][y]
+            print(color,x,y)
             x,y=updatePosition(color,x,y)
             movement = deplacement_couleur(color)
             movementDirection(my_marty1,movement)
-    my_marty1.celebre()
+    my_marty1.celebrate()

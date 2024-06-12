@@ -1,6 +1,18 @@
+#----------------------------------------------------------
+# Projet : Marty
+#----------------------------------------------------------
+# Historique :
+# Version     | Date        | Nom                   | Description
+# 1.00.00     |  12/06/2024 | Joachim/Natthan/Ewan  | Version initiale
+#----------------------------------------------------------
+
 from martypy import Marty
 from application.Calibrage import *
 
+# ----------------------------------------------------------
+# Fonction : 
+# Description :
+# ----------------------------------------------------------
 
 def getColorReading(my_marty):
     reading = my_marty.get_ground_sensor_reading("left")
@@ -16,6 +28,11 @@ def getColorReading(my_marty):
         return "purple"
     else :
         print("Demandez aux développeurs d'ajouter cette couleur dans la base de données")
+
+# ----------------------------------------------------------
+# Fonction : 
+# Description :
+# ----------------------------------------------------------
 
 def getColorReadingRGB(my_marty,numero):
     reading_red = my_marty.get_color_sensor_value_by_channel("left", "red")
@@ -54,26 +71,56 @@ def getColorReadingRGB(my_marty,numero):
         print("Demandez aux développeurs d'ajouter cette couleur dans la base de données")
         return "yellow"
     
+# ----------------------------------------------------------
+# Fonction : 
+# Description :
+# ----------------------------------------------------------
 
 def getObstacleLeft(my_marty):
     obstacleL = my_marty.foot_obstacle_sensed('LeftColorSensor')
     return obstacleL
 
+
+# ----------------------------------------------------------
+# Fonction : 
+# Description :
+# ----------------------------------------------------------
+
 def getObstacleRight(my_marty):
     obstacleR = my_marty.foot_obstacle_sensed('right')
     return obstacleR
+
+# ----------------------------------------------------------
+# Fonction : 
+# Description :
+# ----------------------------------------------------------
 
 def getGroundRight(my_marty):
     onGroundR = my_marty.foot_on_ground('right')
     return onGroundR
 
+# ----------------------------------------------------------
+# Fonction : 
+# Description :
+# ----------------------------------------------------------
+
 def getGroundLeft(my_marty):
     onGroundL = my_marty.foot_on_ground('left')
     return onGroundL
 
+# ----------------------------------------------------------
+# Fonction : 
+# Description :
+# ----------------------------------------------------------
+
 def getDistRight(my_marty) :
     distR = my_marty.get_obstacle_sensor_reading('right')
     return distR
+
+# ----------------------------------------------------------
+# Fonction : 
+# Description :
+# ----------------------------------------------------------
 
 def getDistLeft(my_marty) :
     distL = my_marty.get_obstacle_sensor_reading('left')

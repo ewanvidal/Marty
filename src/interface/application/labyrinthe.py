@@ -1,3 +1,11 @@
+#----------------------------------------------------------
+# Projet : Marty
+#----------------------------------------------------------
+# Historique :
+# Version     | Date        | Nom                   | Description
+# 1.00.00     |  12/06/2024 | Joachim/Natthan/Ewan  | Version initiale
+#----------------------------------------------------------
+
 #from connexion import connexion
 from application.deplacement import avance,recule,deplacement_couleur,movementDirection
 from application.emotion import regard,danse,celebre
@@ -5,16 +13,33 @@ from application.sensors import getColorReading,getObstacleLeft,getObstacleRight
 from time import *
 N=3
 
+# ----------------------------------------------------------
+# Fonction : 
+# Description :
+# ----------------------------------------------------------
+
 def getEnd(tableau):
     for i in range(len(tableau)):
         for j in range(len(tableau)):
             if tableau[i][j]=="red":
                 return (i,j)
+
+# ----------------------------------------------------------
+# Fonction : 
+# Description :
+# ----------------------------------------------------------
+
 def getStart(tableau):
     for i in range(len(tableau)):
         for j in range(len(tableau)):
             if tableau[i][j]=="lightblue":
                 return (i,j)
+
+# ----------------------------------------------------------
+# Fonction : 
+# Description :
+# ----------------------------------------------------------
+
 def updatePosition(deplacement,x,y):
     if (deplacement=="green" or deplacement=="lightblue"):
         return(x+1,y)
@@ -24,12 +49,24 @@ def updatePosition(deplacement,x,y):
         return(x,y-1)
     elif deplacement=="blue":
         return(x,y+1)
+
+# ----------------------------------------------------------
+# Fonction : 
+# Description :
+# ----------------------------------------------------------
+
 def correction(tableau):
     for i in range(len(tableau)):
         varInt=tableau[i][0]
         tableau[i][0]=tableau[i][2]
         tableau[i][2]=varInt
     return tableau
+
+# ----------------------------------------------------------
+# Fonction : 
+# Description :
+# ----------------------------------------------------------
+
 def getLabyrintheColor(my_marty1,my_marty2):
     #(connecter1,my_marty2)=connexion(True,"192.168.0.101")
     #(connecter2,my_marty2)=connexion(True,"192.168.0.10")
@@ -108,6 +145,11 @@ def getLabyrintheColor(my_marty1,my_marty2):
         for i in range(3):
             print(tableau[i])
     return tableau
+
+# ----------------------------------------------------------
+# Fonction : 
+# Description :
+# ----------------------------------------------------------
 
 def executeLabyrinthe(my_marty,tableau):
     print("Est ce que le robot est sur la case de départ ?")

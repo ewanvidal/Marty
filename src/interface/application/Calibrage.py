@@ -1,7 +1,20 @@
+#----------------------------------------------------------
+# Projet : Marty
+#----------------------------------------------------------
+# Historique :
+# Version     | Date        | Nom                   | Description
+# 1.00.00     |  12/06/2024 | Joachim/Natthan/Ewan  | Version initiale
+#----------------------------------------------------------
+
 import os
 
 premiereFois = True
 dicoCouleur = {}
+
+# ----------------------------------------------------------
+# Fonction : 
+# Description :
+# ----------------------------------------------------------
 
 def getCouleurCalibrage(color,numero):
     name="Calibrage"+str(numero)+".txt"
@@ -20,6 +33,11 @@ def getCouleurCalibrage(color,numero):
         return dicoCouleur[color]
     else:
         print("Couleur non valide")
+
+# ----------------------------------------------------------
+# Fonction : 
+# Description :
+# ----------------------------------------------------------
 
 def Calibrage(my_marty, color, numero):
     name="Calibrage"+str(numero)+".txt"

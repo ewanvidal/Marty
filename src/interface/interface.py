@@ -1,3 +1,11 @@
+#----------------------------------------------------------
+# Projet : Marty
+#----------------------------------------------------------
+# Historique :
+# Version     | Date        | Nom                   | Description
+# 1.00.00     |  12/06/2024 | Joachim/Natthan/Ewan  | Version initiale
+#----------------------------------------------------------
+
 import sys
 
 from application.connexion import *
@@ -28,6 +36,10 @@ class MartyRobotController(QWidget):
             }
         """)
         
+    # ----------------------------------------------------------
+    # Méthode : 
+    # Description :
+    # ----------------------------------------------------------
 
     def initUI(self):
         self.setWindowTitle("Marty Robot Controller")
@@ -416,6 +428,11 @@ class MartyRobotController(QWidget):
 
         self.setLayout(grid)
 
+    # ----------------------------------------------------------
+    # Méthode : 
+    # Description :
+    # ----------------------------------------------------------
+
     def usbClicked(self):
         vbox = self.layout()
         for i in range(vbox.count()): 
@@ -431,6 +448,11 @@ class MartyRobotController(QWidget):
             #self.my_marty.play_mp3("sounds/Connect.mp3")
             self.my_marty = my_marty
 
+    # ----------------------------------------------------------
+    # Méthode : 
+    # Description :
+    # ----------------------------------------------------------
+
     def wifiClicked(self):
         vbox = self.layout()
         for i in range(vbox.count()): 
@@ -441,7 +463,11 @@ class MartyRobotController(QWidget):
         self.homeButton.show()
         self.ipAddress.returnPressed.connect(self.onReturnPressed)
         
-        
+    # ----------------------------------------------------------
+    # Méthode : 
+    # Description :
+    # ----------------------------------------------------------
+
     def onReturnPressed(self):
         
         
@@ -478,9 +504,19 @@ class MartyRobotController(QWidget):
                     self.battery1 = self.my_marty.get_battery_remaining()
                     self.batteryBar1.setValue(self.battery1)
                     self.batteryBar1.show()
-            
+
+    # ----------------------------------------------------------
+    # Méthode : 
+    # Description :
+    # ----------------------------------------------------------
+
     def getMyMarty(self):
         return self.my_marty
+
+    # ----------------------------------------------------------
+    # Méthode : 
+    # Description :
+    # ----------------------------------------------------------
 
     def homeClicked(self):
         vbox = self.layout()
@@ -501,6 +537,11 @@ class MartyRobotController(QWidget):
         
         self.batteryBar1.show()
         self.batteryBar2.show()
+
+    # ----------------------------------------------------------
+    # Méthode : 
+    # Description :
+    # ----------------------------------------------------------
 
     def firstRobotClicked(self):
         self.firstRobot.setStyleSheet("""
@@ -531,7 +572,12 @@ class MartyRobotController(QWidget):
         """)
         print("first robot selected")
         self.currentRobot = self.my_marty
-    
+
+    # ----------------------------------------------------------
+    # Méthode : 
+    # Description :
+    # ----------------------------------------------------------
+
     def secondRobotClicked(self):
         self.secondRobot.setStyleSheet("""
             QPushButton {
@@ -561,7 +607,12 @@ class MartyRobotController(QWidget):
         """)
         print("second robot selected")
         self.currentRobot = self.my_marty2
-    
+
+    # ----------------------------------------------------------
+    # Méthode : 
+    # Description :
+    # ----------------------------------------------------------
+
     def controlClicked(self):
         vbox = self.layout()
         for i in range(vbox.count()): 
@@ -587,7 +638,12 @@ class MartyRobotController(QWidget):
         else:
             print("No marty object available")
             self.homeClicked()
-            
+
+    # ----------------------------------------------------------
+    # Méthode : 
+    # Description :
+    # ----------------------------------------------------------
+          
     def calibrationClicked(self):
         vbox = self.layout()
         for i in range(vbox.count()): 
@@ -615,6 +671,11 @@ class MartyRobotController(QWidget):
         else:
             print("No marty object available")
             self.homeClicked()
+
+    # ----------------------------------------------------------
+    # Méthode : 
+    # Description :
+    # ----------------------------------------------------------
 
     def keyPressEvent(self, event):
         if self.isControlled:
@@ -683,11 +744,20 @@ class MartyRobotController(QWidget):
             else:
                 print("Please select a robot to control")
     
-    
+    # ----------------------------------------------------------
+    # Méthode : 
+    # Description :
+    # ----------------------------------------------------------
+
     def redClicked(self):
         if (self.my_marty==self.currentRobot):Calibrage(self.currentRobot,"red",1)
         else:Calibrage(self.currentRobot,"red",2)
-    
+
+    # ----------------------------------------------------------
+    # Méthodes : Couleurs clickées
+    # Description :
+    # ----------------------------------------------------------
+      
     def greenClicked(self):
         if (self.my_marty==self.currentRobot):Calibrage(self.currentRobot,"green",1)
         else:Calibrage(self.currentRobot,"green",2)
@@ -711,7 +781,12 @@ class MartyRobotController(QWidget):
     def blackClicked(self):
         if (self.my_marty==self.currentRobot):Calibrage(self.currentRobot,"black",1)
         else:Calibrage(self.currentRobot,"black",2)        
-        
+
+    # ----------------------------------------------------------
+    # Méthode : 
+    # Description :
+    # ----------------------------------------------------------
+
     def labyrintheClicked(self):
         oldTableau = correction(self.tableau )   
         tableau=[]

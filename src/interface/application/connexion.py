@@ -1,4 +1,18 @@
+#----------------------------------------------------------
+# Projet : Marty
+#----------------------------------------------------------
+# Historique :
+# Version     | Date        | Nom                   | Description
+# 1.00.00     |  12/06/2024 | Joachim/Natthan/Ewan  | Version initiale
+#----------------------------------------------------------
+
 from martypy import Marty
+
+# ----------------------------------------------------------
+# Fonction : 
+# Description :
+# ----------------------------------------------------------
+
 def connexion(connexionWifi=True, ip_adress="192.168.116.149"):
     if connexionWifi:
         try:

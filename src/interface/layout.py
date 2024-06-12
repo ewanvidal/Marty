@@ -1,3 +1,11 @@
+#----------------------------------------------------------
+# Projet : Marty
+#----------------------------------------------------------
+# Historique :
+# Version     | Date        | Nom                   | Description
+# 1.00.00     |  12/06/2024 | Joachim/Natthan/Ewan  | Version initiale
+#----------------------------------------------------------
+
 import sys
 
 from application.connexion import *
@@ -14,6 +22,11 @@ obstSensorL = my_marty.get_obstacle_sensor_reading('left')
 obstSensorR = my_marty.get_obstacle_sensor_reading('right')
 print("obstSensorL: ",obstSensorL,"  |  obstSensorR:",obstSensorR)
 
+# ----------------------------------------------------------
+# Classe : 
+# Description :
+# ----------------------------------------------------------
+
 class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
@@ -25,6 +38,11 @@ class MainWindow(QMainWindow):
         button.clicked.connect(self.the_button_was_clicked)
 
         self.setCentralWidget(button)
+
+    # ----------------------------------------------------------
+    # Fonction : 
+    # Description :
+    # ----------------------------------------------------------
 
     def the_button_was_clicked(self):
         print("Clicked!")

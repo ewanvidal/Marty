@@ -14,13 +14,30 @@ def labyrintheColor(my_marty1):
         return 0
     end1=False
     end2=True
+    compt = 0
     while (end1==False or end2==False):
         if (end1==False):
             color = getColorReadingRGB(my_marty1)
+            last_moves = []
+            last_moves.append(color)
             if (color!=None):
                 movement = deplacement_couleur(color)
                 end1=movementDirection(my_marty1,movement)
+                compt += 1
             else :
+                last_color = "Null"
+                print(last_moves[compt - 1]) 
+                print(last_moves)
+                if (last_moves[compt - 1] == "blue"):
+                    last_color = "pink"
+                elif (last_moves[compt - 1] == "green"):
+                    last_color = "yellow"
+                elif (last_moves[compt - 1] == "yellw"):
+                    last_color = "green"
+                elif (last_moves[compt - 1] == "pink"):
+                    last_color = "blue"
+                movement = deplacement_couleur(last_color)
+                end1=movementDirection(my_marty1,movement)
                 sleep(2)
         #if (end2==False):
             #color = getColorReading(my_marty2)

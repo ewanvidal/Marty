@@ -32,18 +32,18 @@ def deplacement_couleur(couleur):
     if (couleur in ["green","yellow","blue","red","pink", "lightblue", "black"]):
         if (couleur=="green"):
             return "forward"
-        elif (couleur=="blue"):
-            return "left"
-        elif (couleur=="pink"):
+        if (couleur=="blue"):
             return "right"
-        elif (couleur=="yellow"):
+        if (couleur=="pink"):
+            return "left"
+        if (couleur=="yellow"):
             return "backwards"
-        elif (couleur=="red"):
+        if (couleur=="red"):
             return "center"
-        elif (couleur=="lightblue"):
-            return "center"
-        elif (couleur=="black"):
-            return "center"
+        if (couleur=="lightblue"):
+            return "forward"
+        if (couleur=="black"):
+            return "action"
     else :
         print(couleur)
         print("Couleur non valide")

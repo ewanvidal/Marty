@@ -7,7 +7,7 @@ from PyQt6.QtWidgets import QApplication, QWidget, QPushButton, QLineEdit, QLabe
 from PyQt6.QtCore import Qt, QRect
 from PyQt6.QtGui import QIcon, QKeyEvent
 from application.connexion import connexion
-from application.labyrinthe import getLabyrintheColor,executeLabyrinthe
+from application.labyrinthe import getLabyrintheColor,executeLabyrinthe,correction
 from application.Calibrage import Calibrage
 
 
@@ -428,7 +428,7 @@ class MartyRobotController(QWidget):
         (connecter, my_marty)=connexion(False)
         if(connecter):
             print("Le robot est connecté")
-            self.my_marty.play_mp3("sounds/Connect.mp3")
+            #self.my_marty.play_mp3("sounds/Connect.mp3")
             self.my_marty = my_marty
 
     def wifiClicked(self):
@@ -569,24 +569,24 @@ class MartyRobotController(QWidget):
             if widget is not None:
                 widget.hide()
         
-        # if self.my_marty is not None or self.my_marty2 is not None:  
-        self.control_button.hide()
-        self.firstRobot.show()
-        self.secondRobot.show()
-        self.sentence.show()
-        self.homeButton.show()
-        self.labyrintheButton.show()
-        
-        self.batteryBar1.show()
-        self.batteryBar2.show()
-    
-        self.setFocusPolicy(Qt.FocusPolicy.StrongFocus)
-        self.setFocus()
-        self.control_button.hide()
-        self.isControlled = True
-        # else:
-        #     print("No marty object available")
-        #     self.homeClicked()
+        if self.my_marty is not None or self.my_marty2 is not None:  
+            self.control_button.hide()
+            self.firstRobot.show()
+            self.secondRobot.show()
+            self.sentence.show()
+            self.homeButton.show()
+            self.labyrintheButton.show()
+
+            self.batteryBar1.show()
+            self.batteryBar2.show()
+
+            self.setFocusPolicy(Qt.FocusPolicy.StrongFocus)
+            self.setFocus()
+            self.control_button.hide()
+            self.isControlled = True
+        else:
+            print("No marty object available")
+            self.homeClicked()
             
     def calibrationClicked(self):
         vbox = self.layout()
@@ -602,7 +602,6 @@ class MartyRobotController(QWidget):
             self.setFocus()
             self.calibrationButton.hide()
             self.isControlled = True
-
             self.redButton.show()
             self.greenButton.show() 
             self.blueButton.show()
@@ -610,9 +609,9 @@ class MartyRobotController(QWidget):
             self.yellowButton.show()
             self.pinkButton.show()
             self.blackButton.show()
-            
-            self.batteryBar1.show()
-            self.batteryBar2.show()
+
+            self.batteryBar1.hide()
+            self.batteryBar2.hide()
         else:
             print("No marty object available")
             self.homeClicked()
@@ -669,7 +668,10 @@ class MartyRobotController(QWidget):
                 elif event.key() == Qt.Key.Key_L:
                     print("l")
                     if self.currentRobot == self.my_marty:
-                        self.tableau=getLabyrintheColor(self.currentRobot, self.my_marty2)
+                        #self.tableau=getLabyrintheColor(self.currentRobot, self.my_marty2)
+                        self.tableau=[["lightblue","blue", "green"],
+                                      ["blue", "yellow", "green"],
+                                      ["red", "pink", "pink"]]
                         executeLabyrinthe(self.currentRobot, self.tableau)
                         print("labyrinthe")
                     elif self.currentRobot == self.my_marty2:
@@ -711,7 +713,11 @@ class MartyRobotController(QWidget):
         else:Calibrage(self.currentRobot,"black",2)        
         
     def labyrintheClicked(self):
-        tableau = self.tableau        
+        oldTableau = correction(self.tableau )   
+        tableau=[]
+        for i in range(len(oldTableau)):
+            for j in range(len(oldTableau[i])):
+                tableau.append(oldTableau[2-i][2-j])
         # Open a new window
         self.newWindow = QWidget()
         self.newWindow.setWindowTitle("New Window")

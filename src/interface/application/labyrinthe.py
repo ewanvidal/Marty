@@ -24,7 +24,12 @@ def updatePosition(deplacement,x,y):
         return(x,y-1)
     elif deplacement=="blue":
         return(x,y+1)
-                
+def correction(tableau):
+    for i in range(len(tableau)):
+        varInt=tableau[i][0]
+        tableau[i][0]=tableau[i][2]
+        tableau[i][2]=varInt
+    return tableau
 def getLabyrintheColor(my_marty1,my_marty2):
     #(connecter1,my_marty2)=connexion(True,"192.168.0.101")
     #(connecter2,my_marty2)=connexion(True,"192.168.0.10")

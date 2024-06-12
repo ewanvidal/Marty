@@ -22,3 +22,14 @@ class Position:
         self.tableau[x][y]=color
     def getTableau(self):
         return self.tableau
+    def getEnd(self):
+        for i in range(len(self.tableau)):
+            for j in range(len(self.tableau)):
+                if self.tableau[i][j]=="red":
+                    return (i,j)
+    def readTableau(self,myMarty):
+        self.x=0
+        self.y=0
+        fin=self.getEnd()
+
+        

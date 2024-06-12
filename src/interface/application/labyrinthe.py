@@ -43,7 +43,8 @@ def labyrintheColor(my_marty1):
                 else :
                     sleep(2)
         if (end1 and end2):
-            print(position2.getTableau())
-            celebre(my_marty1)
-            return position2.getTableau()
+             tableau=position2.getTableau()
+
+        
+        
 

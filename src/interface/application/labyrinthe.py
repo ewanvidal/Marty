@@ -68,45 +68,47 @@ def getLabyrintheColor(my_marty1):
     go= input()
     if (go!="non"):
         color = getColorReadingRGB(my_marty1)
-        if tableau[0][2]=="black":
+        if tableau[0][2]=="black" and color!="black":
             tableau[0][2]=color
         movementDirection(my_marty1,"forward")
         color = getColorReadingRGB(my_marty1)        
-        if tableau[1][2]=="black":
+        if tableau[1][2]=="black" and color!="black":
             tableau[1][2]=color
         movementDirection(my_marty1,"forward")
         color = getColorReadingRGB(my_marty1)
-        if tableau[2][2]=="black":
+        if tableau[2][2]=="black" and color!="black":
             tableau[2][2]=color
         movementDirection(my_marty1,"left")
         color = getColorReadingRGB(my_marty1)
-        if tableau[2][1]=="black":
+        if tableau[2][1]=="black" and color!="black":
             tableau[2][1]=color
         movementDirection(my_marty1,"backwards")
         color = getColorReadingRGB(my_marty1)
-        if tableau[1][1]=="black":
+        if tableau[1][1]=="black" and color!="black":
             tableau[1][1]=color
         movementDirection(my_marty1,"backwards")
         color = getColorReadingRGB(my_marty1)
-        if tableau[0][1]=="black":
+        if tableau[0][1]=="black" and color!="black":
             tableau[0][1]=color
         movementDirection(my_marty1,"left")
         color = getColorReadingRGB(my_marty1)
-        if tableau[0][0]=="black":
+        if tableau[0][0]=="black" and color!="black":
             tableau[0][0]=color
         movementDirection(my_marty1,"forward")
         color = getColorReadingRGB(my_marty1)
-        if tableau[1][0]=="black":
+        if tableau[1][0]=="black" and color!="black":
             tableau[1][0]=color
         movementDirection(my_marty1,"forward")
         color = getColorReadingRGB(my_marty1)
-        if tableau[2][0]=="black":
+        if tableau[2][0]=="black" and color!="black":
             tableau[2][0]=color
         for i in range(3):
             print(tableau[i])
     return tableau
 
 def executeLabyrinthe(my_marty1,tableau):
+    print("Est ce que le robot est sur la case de départ ?")
+    go= input()
     debut=getStart(tableau)
     fin =getEnd(tableau)
     x,y=debut

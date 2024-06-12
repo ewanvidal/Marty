@@ -59,7 +59,7 @@ def movementDirection(my_marty,movement):
         my_marty.sidestep('right', 6)
         return False
     elif movement == "backwards" :
-        recule(my_marty,7)
+        recule(my_marty,6)
         return False
     else :
         return True

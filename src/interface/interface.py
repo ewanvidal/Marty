@@ -35,6 +35,8 @@ class MartyRobotController(QWidget):
         self.setWindowIcon(QIcon("src/img/robot_icon.ico"))
         
         self.my_marty = None
+        self.my_marty2 = None
+        self.currentRobot = None
 
         grid = QGridLayout()
 
@@ -240,6 +242,58 @@ class MartyRobotController(QWidget):
         self.homeButton.hide()
         self.homeButton.clicked.connect(self.homeClicked)
         
+        # Style the first robot button
+        self.firstRobot = QPushButton("First Robot")
+        self.firstRobot.setStyleSheet("""
+            QPushButton {
+                background-color: #4CAF50;
+                color: white;
+                border: none;
+                border-radius: 5px;
+                padding: 10px;
+                width: 200px;
+                height: 50px;
+                font-size: 20px;
+                font-weight: bold;
+            }
+        """)
+        self.firstRobot.clicked.connect(self.firstRobotClicked)
+        self.firstRobot.hide()
+        
+        # Style the second robot button
+        self.secondRobot = QPushButton("Second Robot")
+        self.secondRobot.setStyleSheet("""
+            QPushButton {
+                background-color: #4CAF50;
+                color: white;
+                border: none;
+                border-radius: 5px;
+                padding: 10px;
+                width: 200px;
+                height: 50px;
+                font-size: 20px;
+                font-weight: bold;
+            }
+        """)
+        self.secondRobot.clicked.connect(self.secondRobotClicked)
+        self.secondRobot.hide()
+        
+        # Sentence to display the choice of the robot
+        self.sentence = QLabel("Choose the robot you want to control !")
+        self.sentence.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.sentence.setStyleSheet("""
+            QLabel {
+                color: white;
+                font-size: 60px;
+                font-weight: bold;
+                padding: 0px;
+                margin: 0px;
+            }
+        """)
+        self.sentence.hide()
+        
+        
+        # Style the main title
         self.mainTitle = QLabel("Marty Robot Controller")
         self.mainTitle.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.mainTitle.setStyleSheet("""
@@ -299,6 +353,10 @@ class MartyRobotController(QWidget):
         grid.addWidget(self.yellowButton, 2, 0, 1, 1)
         grid.addWidget(self.pinkButton, 2, 1, 1, 1)
         grid.addWidget(self.blackButton, 3, 0, 1, 1)
+        
+        grid.addWidget(self.firstRobot, 2, 0, 1, 1)
+        grid.addWidget(self.secondRobot, 2, 1, 1, 1)
+        grid.addWidget(self.sentence, 1, 0, 1, 2)
 
         self.setLayout(grid)
 
@@ -310,6 +368,7 @@ class MartyRobotController(QWidget):
                 widget.hide()
         self.loadingScreen.show()
         self.loadingBar.show()
+        self.homeButton.show()
         (connecter, my_marty)=connexion(False)
         if(connecter):
             print("Le robot est connecté")
@@ -331,17 +390,27 @@ class MartyRobotController(QWidget):
         
         
         if self.ipAddress.text() == "":
-            (connecter,my_marty)=connexion(True)    
+            (connecter,my_marty)=connexion(True)  
             if (connecter):
-                print("le robot est connecté")
-                self.my_marty = my_marty
-                #self.my_marty.play_mp3("src\sounds\Connect.mp3")
+                if (self.my_marty is not None):
+                    print("le deuxième robot est connecté")
+                    self.my_marty2 = my_marty
+                    #self.my_marty.play_mp3("src\sounds\Connect.mp3")
+                if (self.my_marty is None):
+                    print("le premier robot est connecté")
+                    self.my_marty = my_marty
+                    #self.my_marty.play_mp3("src\sounds\Connect.mp3")
         else:
             (connecter,my_marty)=connexion(True, self.ipAddress.text())
             if (connecter):
-                print("le robot est connecté")
-                #self.my_marty.play_mp3("sounds/Connect.mp3")
-                self.my_marty = my_marty
+                if (self.my_marty is not None):
+                    print("le deuxième robot est connecté")
+                    self.my_marty2 = my_marty
+                    #self.my_marty.play_mp3("src\sounds\Connect.mp3")
+                if (self.my_marty is None):
+                    print("le premier robot est connecté")
+                    self.my_marty = my_marty
+                    #self.my_marty.play_mp3("src\sounds\Connect.mp3")
             
     def getMyMarty(self):
         return self.my_marty
@@ -359,17 +428,81 @@ class MartyRobotController(QWidget):
         self.control_button.show()
         self.calibrationButton.show()
         self.isControlled = False
-        
+         
+    def firstRobotClicked(self):
+        self.firstRobot.setStyleSheet("""
+            QPushButton {
+                background-color: #FF0000;  /* Change the background color to red */
+                color: white;
+                border: none;
+                border-radius: 5px;
+                padding: 10px;
+                width: 200px;
+                height: 50px;
+                font-size: 20px;
+                font-weight: bold;
+            }
+        """)
+        self.secondRobot.setStyleSheet("""
+            QPushButton {
+                background-color: #4CAF50; /* Back to normal */
+                color: white;
+                border: none;
+                border-radius: 5px;
+                padding: 10px;
+                width: 200px;
+                height: 50px;
+                font-size: 20px;
+                font-weight: bold;
+            }
+        """)
+        print("first robot selected")
+        self.currentRobot = self.my_marty
+    
+    def secondRobotClicked(self):
+        self.secondRobot.setStyleSheet("""
+            QPushButton {
+                background-color: #FF0000;  /* Change the background color to red */
+                color: white;
+                border: none;
+                border-radius: 5px;
+                padding: 10px;
+                width: 200px;
+                height: 50px;
+                font-size: 20px;
+                font-weight: bold;
+            }
+        """)
+        self.firstRobot.setStyleSheet("""
+            QPushButton {
+                background-color: #4CAF50; /* Back to normal */
+                color: white;
+                border: none;
+                border-radius: 5px;
+                padding: 10px;
+                width: 200px;
+                height: 50px;
+                font-size: 20px;
+                font-weight: bold;
+            }
+        """)
+        print("second robot selected")
+        self.currentRobot = self.my_marty2
+    
     def controlClicked(self):
         vbox = self.layout()
         for i in range(vbox.count()): 
             widget = vbox.itemAt(i).widget()
             if widget is not None:
                 widget.hide()
-        self.control_button.show()
+                
+        self.control_button.hide()
+        self.firstRobot.show()
+        self.secondRobot.show()
+        self.sentence.show()
         self.homeButton.show()
-        self.my_marty = self.getMyMarty()
-        if self.my_marty is not None:
+        
+        if self.my_marty is not None or self.my_marty2 is None:
             self.setFocusPolicy(Qt.FocusPolicy.StrongFocus)
             self.setFocus()
             self.control_button.hide()
@@ -386,8 +519,7 @@ class MartyRobotController(QWidget):
                 widget.hide()
         self.calibrationButton.show()
         
-        self.my_marty = self.getMyMarty()
-        if self.my_marty is not None:
+        if self.my_marty is not None or self.my_marty2 is not None:
             self.homeButton.show()
             self.setFocusPolicy(Qt.FocusPolicy.StrongFocus)
             self.setFocus()
@@ -407,56 +539,56 @@ class MartyRobotController(QWidget):
 
     def keyPressEvent(self, event):
         if self.isControlled:
-            if self.my_marty is not None:
+            if self.my_marty is not None or self.my_marty2 is not None:
                 #basic movement
                 if event.key() == Qt.Key.Key_Z:
-                    movementDirection(self.my_marty,"forward")
+                    movementDirection(self.currentRobot,"forward")
                     print("walking forward")
                 elif event.key() == Qt.Key.Key_S:
-                    movementDirection(self.my_marty,"backwards")
+                    movementDirection(self.currentRobot,"backwards")
                     print("walking backward")
                 elif event.key() == Qt.Key.Key_Q:
-                    movementDirection(self.my_marty,"left")
+                    movementDirection(self.currentRobot,"left")
                     print("turning left")
                 elif event.key() == Qt.Key.Key_D:
-                    movementDirection(self.my_marty,"right")
+                    movementDirection(self.currentRobot,"right")
                     print("turning right")
                 elif event.key() == Qt.Key.Key_A:
-                    rotate(self.my_marty, -15)
+                    rotate(self.currentRobot, -15)
                     print("rotating left")
                 elif event.key() == Qt.Key.Key_E:
-                    rotate(self.my_marty, 15)
+                    rotate(self.currentRobot, 15)
                     print("rotating right")
                 #emotes
                 elif event.key() == Qt.Key.Key_1:
-                    self.my_marty.celebrate()
-                    self.my_marty.play_sound("whisle")
+                    self.currentRobot.celebrate()
+                    self.currentRobot.play_sound("whisle")
                     print("celebration in progress !")
                 elif event.key() == Qt.Key.Key_2:
-                    self.my_marty.dance()
-                    self.my_marty.play_sound("whisle")
+                    self.currentRobot.dance()
+                    self.currentRobot.play_sound("whisle")
                     print("dancing in progress !")
                 elif event.key() == Qt.Key.Key_3:
-                    self.my_marty.circle_dance()
+                    self.currentRobot.circle_dance()
                     print("circle dancing in progress !")
                 elif event.key() == Qt.Key.Key_4:
-                    self.my_marty.circle_dance()
+                    self.currentRobot.circle_dance()
                     print("circle dancing in progress !")
                 elif event.key() == Qt.Key.Key_5:
-                    self.my_marty.kick('left', 180, 1000)
+                    self.currentRobot.kick('left', 180, 1000)
                     print("kicking left leg")
                 elif event.key() == Qt.Key.Key_6:
-                    self.my_marty.lean("forward", 100, 1000)
+                    self.currentRobot.lean("forward", 100, 1000)
                     print("leaning forward")
                 elif event.key() == Qt.Key.Key_7:
-                    self.my_marty.arms(135, 0, 1000)
+                    self.currentRobot.arms(135, 0, 1000)
                     print("raising arms")
                 elif event.key() == Qt.Key.Key_Escape:
-                    self.my_marty.stop("pause")
+                    self.currentRobot.stop("pause")
                     print("stopping")
                 elif event.key() == Qt.Key.Key_L:
                     print("l")
-                    labyrintheColor(self.my_marty)
+                    labyrintheColor(self.currentRobot)
                     print("labyrinthe")
                 else:
                     print("Key not recognized")
@@ -465,25 +597,25 @@ class MartyRobotController(QWidget):
     
     
     def redClicked(self):
-        Calibrage(self.my_marty,"red")
+        Calibrage(self.currentRobot,"red")
     
     def greenClicked(self):
-        Calibrage(self.my_marty,"green")
+        Calibrage(self.currentRobot,"green")
         
     def blueClicked(self):
-        Calibrage(self.my_marty,"blue")
+        Calibrage(self.currentRobot,"blue")
         
     def lightBlueClicked(self):
-        Calibrage(self.my_marty,"lightblue")
+        Calibrage(self.currentRobot,"lightblue")
         
     def yellowClicked(self):
-        Calibrage(self.my_marty,"yellow")
+        Calibrage(self.currentRobot,"yellow")
         
     def pinkClicked(self):
-        Calibrage(self.my_marty,"pink")
+        Calibrage(self.currentRobot,"pink")
         
     def blackClicked(self):
-        Calibrage(self.my_marty,"black")
+        Calibrage(self.currentRobot,"black")
         
     
 if __name__ == "__main__":

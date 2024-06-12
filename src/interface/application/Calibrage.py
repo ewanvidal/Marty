@@ -3,11 +3,12 @@ import os
 premiereFois = True
 dicoCouleur = {}
 
-def getCouleurCalibrage(color):
+def getCouleurCalibrage(color,numero):
+    name="Calibrage"+str(numero)+".txt"
     global premiereFois
     if premiereFois:
         dossier = os.path.dirname(__file__)
-        chemin_fichier = os.path.join(dossier, "Calibrage.txt")
+        chemin_fichier = os.path.join(dossier, name)
         with open(chemin_fichier, "r", encoding='utf-8') as fichier:
             for ligne in fichier:
                 ligneSplit = ligne.split()
@@ -20,9 +21,10 @@ def getCouleurCalibrage(color):
     else:
         print("Couleur non valide")
 
-def Calibrage(my_marty, color):
+def Calibrage(my_marty, color, numero):
+    name="Calibrage"+str(numero)+".txt"
     dossier = os.path.dirname(__file__)
-    chemin_fichier = os.path.join(dossier, "Calibrage.txt")
+    chemin_fichier = os.path.join(dossier, name)
     
     with open(chemin_fichier, "r", encoding='utf-8') as fichierLecture:
         lignes = fichierLecture.readlines()

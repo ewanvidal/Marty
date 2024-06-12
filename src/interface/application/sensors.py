@@ -17,17 +17,17 @@ def getColorReading(my_marty):
     else :
         print("Demandez aux développeurs d'ajouter cette couleur dans la base de données")
 
-def getColorReadingRGB(my_marty):
+def getColorReadingRGB(my_marty,numero):
     reading_red = my_marty.get_color_sensor_value_by_channel("left", "red")
     reading_blue = my_marty.get_color_sensor_value_by_channel("left", "blue")
     reading_green = my_marty.get_color_sensor_value_by_channel("left", "green")
-    blue_tab = getCouleurCalibrage("blue")
-    red_tab = getCouleurCalibrage("red")
-    yellow_tab = getCouleurCalibrage("yellow")
-    green_tab = getCouleurCalibrage("green")
-    pink_tab = getCouleurCalibrage("pink")
-    lightblue_tab = getCouleurCalibrage("lightblue")
-    black_tab = getCouleurCalibrage("black")
+    blue_tab = getCouleurCalibrage("blue",numero)
+    red_tab = getCouleurCalibrage("red",numero)
+    yellow_tab = getCouleurCalibrage("yellow",numero)
+    green_tab = getCouleurCalibrage("green",numero)
+    pink_tab = getCouleurCalibrage("pink",numero)
+    lightblue_tab = getCouleurCalibrage("lightblue",numero)
+    black_tab = getCouleurCalibrage("black",numero)
     if (reading_red > (blue_tab[0] - 10) and reading_red < (blue_tab[0] + 10)) and (reading_green > (blue_tab[1] - 10) and reading_green < (blue_tab[1] + 10)) and (reading_blue > (blue_tab[2] - 10) and reading_blue < (blue_tab[2] + 10)) :
         print("blue")
         return "blue"

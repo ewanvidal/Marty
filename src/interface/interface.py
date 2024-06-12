@@ -671,25 +671,32 @@ class MartyRobotController(QWidget):
     
     
     def redClicked(self):
-        Calibrage(self.currentRobot,"red")
+        if (self.my_marty==self.currentRobot):Calibrage(self.currentRobot,"red",1)
+        else:Calibrage(self.currentRobot,"red",2)
     
     def greenClicked(self):
-        Calibrage(self.currentRobot,"green")
+        if (self.my_marty==self.currentRobot):Calibrage(self.currentRobot,"green",1)
+        else:Calibrage(self.currentRobot,"green",2)
         
     def blueClicked(self):
-        Calibrage(self.currentRobot,"blue")
+        if (self.my_marty==self.currentRobot):Calibrage(self.currentRobot,"blue",1)
+        else:Calibrage(self.currentRobot,"blue",2)
         
     def lightBlueClicked(self):
-        Calibrage(self.currentRobot,"lightblue")
+        if (self.my_marty==self.currentRobot):Calibrage(self.currentRobot,"lightblue",1)
+        else:Calibrage(self.currentRobot,"lightblue",2)
         
     def yellowClicked(self):
-        Calibrage(self.currentRobot,"yellow")
+        if (self.my_marty==self.currentRobot):Calibrage(self.currentRobot,"yellow",1)
+        else:Calibrage(self.currentRobot,"yellow",2)
         
     def pinkClicked(self):
-        Calibrage(self.currentRobot,"pink")
+        if (self.my_marty==self.currentRobot):Calibrage(self.currentRobot,"pink",1)
+        else:Calibrage(self.currentRobot,"pink",2)
         
     def blackClicked(self):
-        Calibrage(self.currentRobot,"black")
+        if (self.my_marty==self.currentRobot):Calibrage(self.currentRobot,"black",1)
+        else:Calibrage(self.currentRobot,"black",2)        
         
     def labyrintheClicked(self):
         tableau = self.tableau        

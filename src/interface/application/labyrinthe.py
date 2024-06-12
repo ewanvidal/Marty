@@ -3,7 +3,6 @@ from application.deplacement import avance,recule,deplacement_couleur,movementDi
 from application.emotion import regard,danse,celebre
 from application.sensors import getColorReading,getObstacleLeft,getObstacleRight,getGroundRight,getGroundLeft,getDistRight,getDistLeft, getColorReadingRGB
 from time import *
-from application.position import Position
 N=3
 
 def getEnd(tableau):
@@ -35,70 +34,70 @@ def getLabyrintheColor(my_marty1,my_marty2):
         print("Erreur de connexion, il faut que les deux robots soient connecté")
         return 0
     tableau = [["none"] * 3 for _ in range(3)]
-    color = getColorReadingRGB(my_marty1)
+    color = getColorReadingRGB(my_marty1,1)
     tableau[0][2]=color
     movementDirection(my_marty1,"forward")
-    color = getColorReadingRGB(my_marty1)
+    color = getColorReadingRGB(my_marty1,1)
     tableau[1][2]=color
     movementDirection(my_marty1,"forward")
-    color = getColorReadingRGB(my_marty1)
+    color = getColorReadingRGB(my_marty1,1)
     tableau[2][2]=color
     movementDirection(my_marty1,"left")
-    color = getColorReadingRGB(my_marty1)
+    color = getColorReadingRGB(my_marty1,1)
     tableau[2][1]=color
     movementDirection(my_marty1,"backwards")
-    color = getColorReadingRGB(my_marty1)
+    color = getColorReadingRGB(my_marty1,1)
     tableau[1][1]=color
     movementDirection(my_marty1,"backwards")
-    color = getColorReadingRGB(my_marty1)
+    color = getColorReadingRGB(my_marty1,1)
     tableau[0][1]=color
     movementDirection(my_marty1,"left")
-    color = getColorReadingRGB(my_marty1)
+    color = getColorReadingRGB(my_marty1,1)
     tableau[0][0]=color
     movementDirection(my_marty1,"forward")
-    color = getColorReadingRGB(my_marty1)
+    color = getColorReadingRGB(my_marty1,1)
     tableau[1][0]=color
     movementDirection(my_marty1,"forward")
-    color = getColorReadingRGB(my_marty1)
+    color = getColorReadingRGB(my_marty1,1)
     tableau[2][0]=color
     for i in range(3):
         print(tableau[i])
     print("Est ce que le deuxième robot est prêt à partir ?")
     go= input()
     if (go!="non"):
-        color = getColorReadingRGB(my_marty2)
+        color = getColorReadingRGB(my_marty2,2)
         if tableau[0][2]=="black" and color!="black":
             tableau[0][2]=color
         movementDirection(my_marty2,"forward")
-        color = getColorReadingRGB(my_marty2)        
+        color = getColorReadingRGB(my_marty2,2)        
         if tableau[1][2]=="black" and color!="black":
             tableau[1][2]=color
         movementDirection(my_marty2,"forward")
-        color = getColorReadingRGB(my_marty2)
+        color = getColorReadingRGB(my_marty2,2)
         if tableau[2][2]=="black" and color!="black":
             tableau[2][2]=color
         movementDirection(my_marty2,"left")
-        color = getColorReadingRGB(my_marty2)
+        color = getColorReadingRGB(my_marty2,2)
         if tableau[2][1]=="black" and color!="black":
             tableau[2][1]=color
         movementDirection(my_marty2,"backwards")
-        color = getColorReadingRGB(my_marty2)
+        color = getColorReadingRGB(my_marty2,2)
         if tableau[1][1]=="black" and color!="black":
             tableau[1][1]=color
         movementDirection(my_marty2,"backwards")
-        color = getColorReadingRGB(my_marty2)
+        color = getColorReadingRGB(my_marty2,2)
         if tableau[0][1]=="black" and color!="black":
             tableau[0][1]=color
         movementDirection(my_marty2,"left")
-        color = getColorReadingRGB(my_marty2)
+        color = getColorReadingRGB(my_marty2,2)
         if tableau[0][0]=="black" and color!="black":
             tableau[0][0]=color
         movementDirection(my_marty2,"forward")
-        color = getColorReadingRGB(my_marty2)
+        color = getColorReadingRGB(my_marty2,2)
         if tableau[1][0]=="black" and color!="black":
             tableau[1][0]=color
         movementDirection(my_marty2,"forward")
-        color = getColorReadingRGB(my_marty2)
+        color = getColorReadingRGB(my_marty2,2)
         if tableau[2][0]=="black" and color!="black":
             tableau[2][0]=color
         for i in range(3):

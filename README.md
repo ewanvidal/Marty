@@ -6,8 +6,9 @@
 * [Objectifs](#Objectifs)
 * [Ressources](#Ressources)
 * [Utilisation](#Utilisation)
-* [Contributeurs](#Contributeurs)
 * [Structure](#Structure)
+* [Remarques](#Remarques)
+* [Contributeurs](#Contributeurs)
 * [Liens](#Liens)
 
 ### **Introduction**

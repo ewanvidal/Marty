@@ -289,7 +289,6 @@ class MartyRobotController(QWidget):
                 border-radius: 5px;
                 padding: 10px;
                 width: 200px;
-                height: 50px;
                 font-size: 20px;
                 font-weight: bold;
             }
@@ -307,7 +306,6 @@ class MartyRobotController(QWidget):
                 border-radius: 5px;
                 padding: 10px;
                 width: 200px;
-                height: 50px;
                 font-size: 20px;
                 font-weight: bold;
             }
@@ -500,6 +498,9 @@ class MartyRobotController(QWidget):
         
         self.batteryBar1.setValue(self.battery1)
         self.batteryBar2.setValue(self.battery2)
+        
+        self.batteryBar1.show()
+        self.batteryBar2.show()
 
     def firstRobotClicked(self):
         self.firstRobot.setStyleSheet("""
@@ -575,6 +576,9 @@ class MartyRobotController(QWidget):
         self.sentence.show()
         self.homeButton.show()
         self.labyrintheButton.show()
+        
+        self.batteryBar1.show()
+        self.batteryBar2.show()
     
         self.setFocusPolicy(Qt.FocusPolicy.StrongFocus)
         self.setFocus()
@@ -606,6 +610,9 @@ class MartyRobotController(QWidget):
             self.yellowButton.show()
             self.pinkButton.show()
             self.blackButton.show()
+            
+            self.batteryBar1.show()
+            self.batteryBar2.show()
         else:
             print("No marty object available")
             self.homeClicked()
@@ -661,9 +668,14 @@ class MartyRobotController(QWidget):
                     print("stopping")
                 elif event.key() == Qt.Key.Key_L:
                     print("l")
-                    self.tableau=getLabyrintheColor(self.currentRobot)
-                    executeLabyrinthe(self.currentRobot, self.tableau)
-                    print("labyrinthe")
+                    if self.currentRobot == self.my_marty:
+                        self.tableau=getLabyrintheColor(self.currentRobot, self.my_marty2)
+                        executeLabyrinthe(self.currentRobot, self.tableau)
+                        print("labyrinthe")
+                    elif self.currentRobot == self.my_marty2:
+                        self.tableau=getLabyrintheColor(self.currentRobot, self.my_marty)
+                        executeLabyrinthe(self.currentRobot, self.tableau)
+                        print("labyrinthe")
                 else:
                     print("Key not recognized")
             else:

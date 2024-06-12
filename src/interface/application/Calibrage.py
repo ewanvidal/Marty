@@ -12,8 +12,8 @@ premiereFois = True
 dicoCouleur = {}
 
 # ----------------------------------------------------------
-# Fonction : 
-# Description :
+# Fonction : getCouleurCalibrage(color,numero)
+# Description : Lis dans un fichier nommé Calibrage<numero>.txt les valeurs de la couleur passé en argument et enregistre dans un dictionnaire pour que l'appel soit plus rapide 
 # ----------------------------------------------------------
 
 def getCouleurCalibrage(color,numero):
@@ -35,8 +35,8 @@ def getCouleurCalibrage(color,numero):
         print("Couleur non valide")
 
 # ----------------------------------------------------------
-# Fonction : 
-# Description :
+# Fonction : Calibrage(my_marty, color, numero)
+# Description : enregiste dans un fichier nommé Calibrage<numero>.txt les valeurs de la couleur passé en argument
 # ----------------------------------------------------------
 
 def Calibrage(my_marty, color, numero):

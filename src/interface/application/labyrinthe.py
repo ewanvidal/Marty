@@ -14,8 +14,8 @@ from time import *
 N=3
 
 # ----------------------------------------------------------
-# Fonction : 
-# Description :
+# Fonction : getEnd(tableau)
+# Description : renvoie la position de la couleur rouge représentant la fin 
 # ----------------------------------------------------------
 
 def getEnd(tableau):
@@ -25,8 +25,8 @@ def getEnd(tableau):
                 return (i,j)
 
 # ----------------------------------------------------------
-# Fonction : 
-# Description :
+# Fonction : getStart(tableau)
+# Description : renvoie la position de la couleur bleu clair représentant le début 
 # ----------------------------------------------------------
 
 def getStart(tableau):
@@ -36,8 +36,9 @@ def getStart(tableau):
                 return (i,j)
 
 # ----------------------------------------------------------
-# Fonction : 
-# Description :
+# Fonction : updatePosition(deplacement,x,y)
+# Description : renvoie la prochaine position en fonction de la couleur en suivant le schéma suivant:
+#                   green ↑     yellow ↓    pink ←      blue→ 
 # ----------------------------------------------------------
 
 def updatePosition(deplacement,x,y):
@@ -51,8 +52,8 @@ def updatePosition(deplacement,x,y):
         return(x,y+1)
 
 # ----------------------------------------------------------
-# Fonction : 
-# Description :
+# Fonction : correction tableau
+# Description : corrige l'erreur qui faisait que le tableau était affiché en mirroir
 # ----------------------------------------------------------
 
 def correction(tableau):
@@ -63,22 +64,27 @@ def correction(tableau):
     return tableau
 
 # ----------------------------------------------------------
-# Fonction : 
-# Description :
+# Fonction : getLabyrintheColor(my_marty1,my_marty2)
+# Description : effectue la reconnaissance pour détecter les couleurs puis les stocker dans un tableau
+#               Le chemin suivi est le suivant: ↑↑←↓↓←↑↑←
+#               Avant que le deuxième robot parte, il faut écrire quelque chose d'autre que non dans la console
+#               Renvoie un tableau contenant les couleurs recconnues 
 # ----------------------------------------------------------
 
 def getLabyrintheColor(my_marty1,my_marty2):
     #(connecter1,my_marty2)=connexion(True,"192.168.0.101")
     #(connecter2,my_marty2)=connexion(True,"192.168.0.10")
-    connecter2=True
-    connecter1=True
-    if (not(connecter1 and connecter2)):
-        print("Erreur de connexion, il faut que les deux robots soient connecté")
-        return 0
-    tableau = [["none"] * 3 for _ in range(3)]
-    color = getColorReadingRGB(my_marty1,1)
-    tableau[0][2]=color
-    movementDirection(my_marty1,"forward")
+    #connecter2=True
+    #connecter1=True
+    #if (not(connecter1 and connecter2)):
+        #print("Erreur de connexion, il faut que les deux robots soient connecté")
+        #return 0
+
+    
+    tableau = [["none"] * 3 for _ in range(3)]  #crée le tableau
+    color = getColorReadingRGB(my_marty1,1)     #récupère la couleur au sol 
+    tableau[0][2]=color                         #actualise le tableau
+    movementDirection(my_marty1,"forward")      #fais avancer marty
     color = getColorReadingRGB(my_marty1,1)
     tableau[1][2]=color
     movementDirection(my_marty1,"forward")
@@ -108,7 +114,7 @@ def getLabyrintheColor(my_marty1,my_marty2):
     go= input()
     if (go!="non"):
         color = getColorReadingRGB(my_marty2,2)
-        if tableau[0][2]=="black" and color!="black":
+        if tableau[0][2]=="black" and color!="black":   #vérifie que la couleur n'est pas noir et que la couleur précédemment enregistrés peut être remplacée 
             tableau[0][2]=color
         movementDirection(my_marty2,"forward")
         color = getColorReadingRGB(my_marty2,2)        
@@ -147,8 +153,8 @@ def getLabyrintheColor(my_marty1,my_marty2):
     return tableau
 
 # ----------------------------------------------------------
-# Fonction : 
-# Description :
+# Fonction :    executeLabyrinthe(my_marty,tableau):
+# Description : effectue le chemin passé en argument via le tableau calculé dans la fonction précédente
 # ----------------------------------------------------------
 
 def executeLabyrinthe(my_marty,tableau):
@@ -158,7 +164,7 @@ def executeLabyrinthe(my_marty,tableau):
     debut=getStart(tableau)
     fin =getEnd(tableau)
     x,y=debut
-    while ((x,y)!=fin):
+    while ((x,y)!=fin):                         # Tant qu'on est pas à la fin, on lit la couleur dans le tableau et effectue la tache associé 
             color=tableau[x][y]
             print(color,x,y)
             x,y=updatePosition(color,x,y)

@@ -37,8 +37,8 @@ class MartyRobotController(QWidget):
         """)
         
     # ----------------------------------------------------------
-    # Méthode : 
-    # Description :
+    # Méthode : initUI
+    # Description : initialisation de l'interface graphique
     # ----------------------------------------------------------
 
     def initUI(self):
@@ -403,6 +403,7 @@ class MartyRobotController(QWidget):
         """)
         self.wifiButton.clicked.connect(self.wifiClicked)
         
+        # Add widgets to the grid layout
         grid.addWidget(self.mainTitle, 1, 0, 1, 2)
         grid.addWidget(self.homeButton, 0, 1, 1, 1)
         grid.addWidget(self.usbButton, 2, 0, 1, 1)
@@ -429,8 +430,8 @@ class MartyRobotController(QWidget):
         self.setLayout(grid)
 
     # ----------------------------------------------------------
-    # Méthode : 
-    # Description :
+    # Méthode : usb clicked
+    # Description : Gestion du clique sur le bouton USB pour connecter le robot par câble
     # ----------------------------------------------------------
 
     def usbClicked(self):
@@ -449,8 +450,8 @@ class MartyRobotController(QWidget):
             self.my_marty = my_marty
 
     # ----------------------------------------------------------
-    # Méthode : 
-    # Description :
+    # Méthode : wifiClicked
+    # Description : Gestion du clique sur le bouton WiFi pour connecter le robot par WiFi grâce à une adresse IP
     # ----------------------------------------------------------
 
     def wifiClicked(self):
@@ -464,8 +465,8 @@ class MartyRobotController(QWidget):
         self.ipAddress.returnPressed.connect(self.onReturnPressed)
         
     # ----------------------------------------------------------
-    # Méthode : 
-    # Description :
+    # Méthode : onReturnPressed
+    # Description : Permet d'appeler les fonction pour connecter les robots en fonction de l'adresse IP entrée après avoir appuyé sur la touche "entrée"
     # ----------------------------------------------------------
 
     def onReturnPressed(self):
@@ -506,16 +507,16 @@ class MartyRobotController(QWidget):
                     self.batteryBar1.show()
 
     # ----------------------------------------------------------
-    # Méthode : 
-    # Description :
+    # Méthode : getMyMarty
+    # Description : Permet de récupérer l'objet Marty
     # ----------------------------------------------------------
 
     def getMyMarty(self):
         return self.my_marty
 
     # ----------------------------------------------------------
-    # Méthode : 
-    # Description :
+    # Méthode : homeClicked
+    # Description : Gestion du clique sur le bouton "home" pour revenir à l'écran d'accueil
     # ----------------------------------------------------------
 
     def homeClicked(self):
@@ -539,8 +540,8 @@ class MartyRobotController(QWidget):
         self.batteryBar2.show()
 
     # ----------------------------------------------------------
-    # Méthode : 
-    # Description :
+    # Méthode : firstRobotClicked
+    # Description : Gestion du clique sur le bouton "first robot" pour sélectionner le premier robot
     # ----------------------------------------------------------
 
     def firstRobotClicked(self):
@@ -574,8 +575,8 @@ class MartyRobotController(QWidget):
         self.currentRobot = self.my_marty
 
     # ----------------------------------------------------------
-    # Méthode : 
-    # Description :
+    # Méthode : secondRobotClicked
+    # Description : Gestion du clique sur le bouton "second robot" pour sélectionner le deuxième robot
     # ----------------------------------------------------------
 
     def secondRobotClicked(self):
@@ -609,8 +610,8 @@ class MartyRobotController(QWidget):
         self.currentRobot = self.my_marty2
 
     # ----------------------------------------------------------
-    # Méthode : 
-    # Description :
+    # Méthode : controlClicked
+    # Description : Gestion du clique sur le bouton "control" pour entrer dans le menu de contrôle
     # ----------------------------------------------------------
 
     def controlClicked(self):
@@ -640,8 +641,8 @@ class MartyRobotController(QWidget):
             self.homeClicked()
 
     # ----------------------------------------------------------
-    # Méthode : 
-    # Description :
+    # Méthode : calibrationClicked
+    # Description : Gestion du clique sur le bouton "calibration" pour entrer dans le menu de calibration des couleurs
     # ----------------------------------------------------------
           
     def calibrationClicked(self):
@@ -673,10 +674,10 @@ class MartyRobotController(QWidget):
             self.homeClicked()
 
     # ----------------------------------------------------------
-    # Méthode : 
-    # Description :
+    # Méthode : keyPressEvent
+    # Description : Gestion des touches du clavier pour contrôler le robot (emotes, mouvements, etc.)
     # ----------------------------------------------------------
-
+    
     def keyPressEvent(self, event):
         if self.isControlled:
             if self.currentRobot is not None:
@@ -702,11 +703,9 @@ class MartyRobotController(QWidget):
                 #emotes
                 elif event.key() == Qt.Key.Key_1:
                     self.currentRobot.celebrate()
-                    self.currentRobot.play_sound("whisle")
                     print("celebration in progress !")
                 elif event.key() == Qt.Key.Key_2:
                     self.currentRobot.dance()
-                    self.currentRobot.play_sound("whisle")
                     print("dancing in progress !")
                 elif event.key() == Qt.Key.Key_3:
                     self.currentRobot.circle_dance()
@@ -722,17 +721,14 @@ class MartyRobotController(QWidget):
                     print("leaning forward")
                 elif event.key() == Qt.Key.Key_7:
                     self.currentRobot.arms(135, 0, 1000)
-                    print("raising arms")
+                    print("raising arm")
                 elif event.key() == Qt.Key.Key_Escape:
                     self.currentRobot.stop("pause")
                     print("stopping")
                 elif event.key() == Qt.Key.Key_L:
                     print("l")
                     if self.currentRobot == self.my_marty:
-                        #self.tableau=getLabyrintheColor(self.currentRobot, self.my_marty2)
-                        self.tableau=[["lightblue","blue", "green"],
-                                      ["blue", "yellow", "green"],
-                                      ["red", "pink", "pink"]]
+                        self.tableau=getLabyrintheColor(self.currentRobot, self.my_marty2)
                         executeLabyrinthe(self.currentRobot, self.tableau)
                         print("labyrinthe")
                     elif self.currentRobot == self.my_marty2:
@@ -745,8 +741,8 @@ class MartyRobotController(QWidget):
                 print("Please select a robot to control")
     
     # ----------------------------------------------------------
-    # Méthode : 
-    # Description :
+    # Méthode : redClicked
+    # Description : Gestion du clique sur le bouton "red" pour calibrer la couleur rouge
     # ----------------------------------------------------------
 
     def redClicked(self):
@@ -755,7 +751,7 @@ class MartyRobotController(QWidget):
 
     # ----------------------------------------------------------
     # Méthodes : Couleurs clickées
-    # Description :
+    # Description : Gestion du clique sur les boutons de couleurs pour calibrer les couleurs (idem redClicked)
     # ----------------------------------------------------------
       
     def greenClicked(self):
@@ -783,8 +779,8 @@ class MartyRobotController(QWidget):
         else:Calibrage(self.currentRobot,"black",2)        
 
     # ----------------------------------------------------------
-    # Méthode : 
-    # Description :
+    # Méthode : labyrinthClicked
+    # Description : Gestion du clique sur le bouton "labyrinthe" pour afficher les couleurs du labyrinthe
     # ----------------------------------------------------------
 
     def labyrintheClicked(self):
@@ -798,19 +794,18 @@ class MartyRobotController(QWidget):
         self.newWindow.setWindowTitle("New Window")
         self.newWindow.setGeometry(QRect(100, 100, 600, 600))
         
-        # Créer un QVBoxLayout pour la nouvelle fenêtre
         layout = QGridLayout()
         
         for index, color in enumerate(tableau):
             label = QLabel()
             label.setStyleSheet(f"background-color: {color};")
-            # Calculer la ligne et la colonne pour un layout 3x3
+            # calculate the row and column
             row = index // 3
             column = index % 3
             layout.addWidget(label, row, column)
         
         
-        self.newWindow.setLayout(layout)  # Définir le layout pour newWindow
+        self.newWindow.setLayout(layout)
         
         self.newWindow.show()
         

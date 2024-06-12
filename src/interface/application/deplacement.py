@@ -7,23 +7,23 @@ def avance(my_marty,distance):
         groundSensorR = my_marty.get_ground_sensor_reading('right')
         if (groundSensorL>10 and groundSensorR>30 and not(obstacleL) and not(obstacleR)):
             my_marty.walk(1,'auto',0,25,2500,None)
-            
-#def rotate(my_marty,angle):
- #   
-  #  if(angle>0):
-   #     while(angle>15):
-    #        my_marty.walk(0,'auto',15)
-     #       angle=angle-15
-      #      print(angle)
-       # my_marty.walk(0,'auto',angle)
-    #else :
-     #   while(angle<-15):
-      #      my_marty.walk(0,'auto',-15)
-       #     angle=angle+15
-        #my_marty.walk(0,'auto',angle)
+  
+def rotate(my_marty,angle):
+   
+    if(angle>0):
+        while(angle>15):
+            my_marty.walk(0,'auto',15)
+            angle=angle-15
+            print(angle)
+        my_marty.walk(0,'auto',angle)
+    else :
+        while(angle<-15):
+            my_marty.walk(0,'auto',-15)
+            angle=angle+15
+        my_marty.walk(0,'auto',angle)
     
-#def retourner(my_marty):
- #   rotate(my_marty,180)
+def retourner(my_marty):
+   rotate(my_marty,180)
 def recule(my_marty,distance):
     my_marty.walk(distance,'auto',0,-25,2500,None)
 

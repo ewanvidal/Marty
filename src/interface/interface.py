@@ -3,8 +3,8 @@ import sys
 from application.connexion import *
 from application.deplacement import *
 
-from PyQt6.QtWidgets import QApplication, QWidget, QPushButton, QLineEdit, QLabel, QGridLayout, QProgressBar
-from PyQt6.QtCore import Qt
+from PyQt6.QtWidgets import QApplication, QWidget, QPushButton, QLineEdit, QLabel, QGridLayout, QProgressBar, QVBoxLayout
+from PyQt6.QtCore import Qt, QRect
 from PyQt6.QtGui import QIcon, QKeyEvent
 from application.connexion import connexion
 from application.labyrinthe import getLabyrintheColor,executeLabyrinthe
@@ -37,6 +37,7 @@ class MartyRobotController(QWidget):
         self.my_marty = None
         self.my_marty2 = None
         self.currentRobot = None
+        self.tableau = [] 
 
         grid = QGridLayout()
 
@@ -292,6 +293,22 @@ class MartyRobotController(QWidget):
         """)
         self.sentence.hide()
         
+        # Style the Labyrinthe button
+        self.labyrintheButton = QPushButton("Labyrinthe")
+        self.labyrintheButton.setStyleSheet("""
+            QPushButton {
+                background-color: #4CAF50;
+                color: white;
+                border: none;
+                border-radius: 5px;
+                padding: 10px;
+                width: 200px;
+                font-size: 20px;
+                font-weight: bold;
+            }
+        """)
+        self.labyrintheButton.clicked.connect(self.labyrintheClicked)
+        self.labyrintheButton.hide()
         
         # Style the main title
         self.mainTitle = QLabel("Marty Robot Controller")
@@ -323,6 +340,7 @@ class MartyRobotController(QWidget):
         """)
         self.usbButton.clicked.connect(self.usbClicked)
         
+        # Style the WiFi button
         self.wifiButton = QPushButton("WiFi")
         self.wifiButton.setStyleSheet("""
             QPushButton {
@@ -357,6 +375,7 @@ class MartyRobotController(QWidget):
         grid.addWidget(self.firstRobot, 2, 0, 1, 1)
         grid.addWidget(self.secondRobot, 2, 1, 1, 1)
         grid.addWidget(self.sentence, 1, 0, 1, 2)
+        grid.addWidget(self.labyrintheButton, 0, 0, 1, 1)
 
         self.setLayout(grid)
 
@@ -496,20 +515,21 @@ class MartyRobotController(QWidget):
             if widget is not None:
                 widget.hide()
         
-        if self.my_marty is not None or self.my_marty2 is not None:  
-            self.control_button.hide()
-            self.firstRobot.show()
-            self.secondRobot.show()
-            self.sentence.show()
-            self.homeButton.show()
-        
-            self.setFocusPolicy(Qt.FocusPolicy.StrongFocus)
-            self.setFocus()
-            self.control_button.hide()
-            self.isControlled = True
-        else:
-            print("No marty object available")
-            self.homeClicked()
+        # if self.my_marty is not None or self.my_marty2 is not None:  
+        self.control_button.hide()
+        self.firstRobot.show()
+        self.secondRobot.show()
+        self.sentence.show()
+        self.homeButton.show()
+        self.labyrintheButton.show()
+    
+        self.setFocusPolicy(Qt.FocusPolicy.StrongFocus)
+        self.setFocus()
+        self.control_button.hide()
+        self.isControlled = True
+        # else:
+        #     print("No marty object available")
+        #     self.homeClicked()
             
     def calibrationClicked(self):
         vbox = self.layout()
@@ -588,8 +608,8 @@ class MartyRobotController(QWidget):
                     print("stopping")
                 elif event.key() == Qt.Key.Key_L:
                     print("l")
-                    tableau=getLabyrintheColor(self.currentRobot)
-                    executeLabyrinthe(self.currentRobot,tableau)
+                    self.tableau=getLabyrintheColor(self.currentRobot)
+                    executeLabyrinthe(self.currentRobot, self.tableau)
                     print("labyrinthe")
                 else:
                     print("Key not recognized")
@@ -617,6 +637,29 @@ class MartyRobotController(QWidget):
         
     def blackClicked(self):
         Calibrage(self.currentRobot,"black")
+        
+    def labyrintheClicked(self):
+        tableau = self.tableau        
+        # Open a new window
+        self.newWindow = QWidget()
+        self.newWindow.setWindowTitle("New Window")
+        self.newWindow.setGeometry(QRect(100, 100, 600, 600))
+        
+        # Créer un QVBoxLayout pour la nouvelle fenêtre
+        layout = QGridLayout()
+        
+        for index, color in enumerate(tableau):
+            label = QLabel()
+            label.setStyleSheet(f"background-color: {color};")
+            # Calculer la ligne et la colonne pour un layout 3x3
+            row = index // 3
+            column = index % 3
+            layout.addWidget(label, row, column)
+        
+        
+        self.newWindow.setLayout(layout)  # Définir le layout pour newWindow
+        
+        self.newWindow.show()
         
     
 if __name__ == "__main__":

@@ -8,16 +8,28 @@ class Position:
     def getCurrentPosition(self):
         return(self.x,self.y)
     def updatePosition(self,deplacement):
-        if deplacement=="forward":
+        self.updateTableau(deplacement)
+        if deplacement=="green":
             self.x+=1
-        elif deplacement=="backward":
+        elif deplacement=="yellow":
             self.x+=-1
-        elif deplacement=="right":
+        elif deplacement=="pink":
             self.y+=1
-        elif deplacement=="left":
+        elif deplacement=="blue":
             self.y+=-1
     def updateTableau(self,color):
         (x,y)=self.getCurrentPosition()
         self.tableau[x][y]=color
     def getTableau(self):
         return self.tableau
+    def getEnd(self):
+        for i in range(len(self.tableau)):
+            for j in range(len(self.tableau)):
+                if self.tableau[i][j]=="red":
+                    return (i,j)
+    def readTableau(self,myMarty):
+        self.x=0
+        self.y=0
+        fin=self.getEnd()
+
+        

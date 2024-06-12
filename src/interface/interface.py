@@ -17,11 +17,23 @@ class MartyRobotController(QWidget):
 
         self.initUI()
         self.isControlled = False
+        
+        #create background
+        self.setStyleSheet("""
+            QLabel {
+                background-image: url('src/img/background.jpg');
+                background-repeat: no-repeat;
+                background-position: center;
+                border-image: url('src/img/background.jpg') 0 0 0 0 stretch stretch;
+            }
+        """)
+        
 
     def initUI(self):
         self.setWindowTitle("Marty Robot Controller")
-        self.setGeometry(400, 400, 800, 600)
+        self.setGeometry(200, 100, 1260, 800)
         self.setWindowIcon(QIcon("src/img/robot_icon.ico"))
+        
         self.my_marty = None
 
         grid = QGridLayout()
@@ -53,7 +65,9 @@ class MartyRobotController(QWidget):
         self.calibrationButton = QPushButton("Calibrate")
         self.calibrationButton.setStyleSheet("""
             QPushButton {
-            background-color: blue;
+            background-image: url('src/img/ainbow_gradient.jpg');
+            background-repeat: no-repeat;
+            background-position: center;
             color: white;
             border: none;
             border-radius: 5px;
@@ -230,8 +244,8 @@ class MartyRobotController(QWidget):
         self.mainTitle.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.mainTitle.setStyleSheet("""
             QLabel {
-                color: black;
-                font-size: 40px;
+                color: white;
+                font-size: 80px;
                 font-weight: bold;
                 padding: 0px;
                 margin: 0px;
@@ -279,7 +293,7 @@ class MartyRobotController(QWidget):
         grid.addWidget(self.calibrationButton, 0, 1, 1, 1)
         
         grid.addWidget(self.redButton, 0, 0, 1, 1)
-        grid.addWidget(self.greenButton, 0, 1, 1, 1)
+        grid.addWidget(self.greenButton, 3, 1, 1, 1)
         grid.addWidget(self.blueButton, 1, 0, 1, 1)
         grid.addWidget(self.lightBlueButton, 1, 1, 1, 1)
         grid.addWidget(self.yellowButton, 2, 0, 1, 1)
@@ -314,8 +328,10 @@ class MartyRobotController(QWidget):
         
         
     def onReturnPressed(self):
+        
+        
         if self.ipAddress.text() == "":
-            (connecter,my_marty)=connexion(True)
+            (connecter,my_marty)=connexion(True)    
             if (connecter):
                 print("le robot est connecté")
                 self.my_marty = my_marty
@@ -377,7 +393,7 @@ class MartyRobotController(QWidget):
             self.setFocus()
             self.calibrationButton.hide()
             self.isControlled = True
-            
+
             self.redButton.show()
             self.greenButton.show() 
             self.blueButton.show()

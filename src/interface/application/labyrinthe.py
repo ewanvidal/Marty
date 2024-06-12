@@ -6,7 +6,28 @@ from time import *
 from application.position import Position
 N=3
 
-def labyrintheColor(my_marty1):
+def getEnd(tableau):
+    for i in range(len(tableau)):
+        for j in range(len(tableau)):
+            if tableau[i][j]=="red":
+                return (i,j)
+def getStart(tableau):
+    for i in range(len(tableau)):
+        for j in range(len(tableau)):
+            if tableau[i][j]=="lightblue":
+                return (i,j)
+def updatePosition(deplacement,x,y):
+    if (deplacement=="green" or deplacement=="ligtblue"):
+        x+=1
+    elif deplacement=="yellow":
+        x+=-1
+    elif deplacement=="pink":
+        y+=1
+    elif deplacement=="blue":
+        y+=-1
+    return (x,y)
+                
+def getLabyrintheColor(my_marty1):
     #(connecter1,my_marty2)=connexion(True,"192.168.0.101")
     #(connecter2,my_marty2)=connexion(True,"192.168.0.10")
     connecter2=True
@@ -85,63 +106,13 @@ def labyrintheColor(my_marty1):
             print(tableau[i])
     return tableau
 
-"""
-    x=0
-    y=N-1
-    for i in range(N):
-        for j in range(N):
-            print(x,y)
-            color = getColorReadingRGB(my_marty1)
-            if (color!=None):
-                if (y==1):
-                    x=x-1
-                    position1.updatePositionByValues((x,y),color)
-                    error=movementDirection(my_marty1,"backwards")
-                    print(error)
-                else :
-                    x=x+1
-                    position1.updatePositionByValues((x,y),color)
-                    error=movementDirection(my_marty1,"forward")
-                    print(error)
-
-            else :
-                sleep(2)
-        j=j-1
-        color = getColorReadingRGB(my_marty1)
-        position1.updatePositionByValues((i,j),color)
-        error=movementDirection(my_marty1,"left")
-        
-    print(position1.getTableau())
-    x=0
-    y=N-1
-    print("Est ce que le deuxième robot est prêt à partir ?")
-    go= input()
-    if (go!="non"):
-        position2=Position("my_marty2",N)
-        tableauPos=position1.getTableau()
-        for i in range(len(tableauPos)):
-            for j in range(len(tableauPos[i])):
-                position2.updateTableau(tableauPos[i][j])
-        for i in range(N):
-            for j in range(N):
-                color = getColorReadingRGB(my_marty1)
-                if (color!=None):
-                    if (y==1):
-                        x=x-1
-                        position2.updatePositionByValues((x,y),color)
-                        error=movementDirection(my_marty1,"backwards")
-                    else :
-                        x=x+1
-                        position2.updatePositionByValues((x,y),color)
-                        error=movementDirection(my_marty1,"forward")
-                else :
-                    sleep(N-1)
-            j=j-1
-            color = getColorReadingRGB(my_marty1)
-            position1.updatePositionByValues((i,j),color)
-            error=movementDirection(my_marty1,"left")
-        print(position2.getTableau())
-    """
-        
-        
-
+def executeLabyrinthe(my_marty1,tableau):
+    debut=getStart(tableau)
+    fin =getEnd(tableau)
+    x,y=debut
+    while ((x,y)!=fin):
+            color=tableau[x][y]
+            x,y=updatePosition(color,x,y)
+            movement = deplacement_couleur(color)
+            movementDirection(my_marty1,movement)
+    my_marty1.celebre()

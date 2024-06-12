@@ -7,7 +7,7 @@ from PyQt6.QtWidgets import QApplication, QWidget, QPushButton, QLineEdit, QLabe
 from PyQt6.QtCore import Qt
 from PyQt6.QtGui import QIcon, QKeyEvent
 from application.connexion import connexion
-from application.labyrinthe import labyrintheColor
+from application.labyrinthe import getLabyrintheColor,executeLabyrinthe
 from application.Calibrage import Calibrage
 
 
@@ -588,7 +588,8 @@ class MartyRobotController(QWidget):
                     print("stopping")
                 elif event.key() == Qt.Key.Key_L:
                     print("l")
-                    labyrintheColor(self.currentRobot)
+                    tableau=getLabyrintheColor(self.currentRobot)
+                    executeLabyrinthe(self.currentRobot,tableau)
                     print("labyrinthe")
                 else:
                     print("Key not recognized")

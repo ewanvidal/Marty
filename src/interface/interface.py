@@ -10,6 +10,7 @@ import sys
 
 from application.connexion import *
 from application.deplacement import *
+from application.emotion import regard
 
 from PyQt6.QtWidgets import QApplication, QWidget, QPushButton, QLineEdit, QLabel, QGridLayout, QProgressBar, QVBoxLayout
 from PyQt6.QtCore import Qt, QRect
@@ -478,14 +479,14 @@ class MartyRobotController(QWidget):
                 if (self.my_marty is not None):
                     print("le deuxième robot est connecté")
                     self.my_marty2 = my_marty
-                    #self.my_marty.play_mp3("src\sounds\Connect.mp3")
+                    self.my_marty.play_mp3("src\sounds\Connect.mp3")
                     self.battery2 = self.my_marty2.get_battery_remaining()
                     self.batteryBar2.setValue(self.battery2)
                     
                 if (self.my_marty is None):
                     print("le premier robot est connecté")
                     self.my_marty = my_marty
-                    #self.my_marty.play_mp3("src\sounds\Connect.mp3")
+                    self.my_marty.play_mp3("src\sounds\Connect.mp3")
                     self.battery1 = self.my_marty.get_battery_remaining()
                     self.batteryBar1.setValue(self.battery1)
         else:
@@ -494,14 +495,14 @@ class MartyRobotController(QWidget):
                 if (self.my_marty is not None):
                     print("le deuxième robot est connecté")
                     self.my_marty2 = my_marty
-                    #self.my_marty.play_mp3("src\sounds\Connect.mp3")
+                    self.my_marty.play_mp3("src\sounds\Connect.mp3")
                     self.battery2 = self.my_marty2.get_battery_remaining()
                     self.batteryBar2.setValue(self.battery2)
                     self.batteryBar2.show()
                 if (self.my_marty is None):
                     print("le premier robot est connecté")
                     self.my_marty = my_marty
-                    #self.my_marty.play_mp3("src\sounds\Connect.mp3")
+                    self.my_marty.play_mp3("src\sounds\Connect.mp3")
                     self.battery1 = self.my_marty.get_battery_remaining()
                     self.batteryBar1.setValue(self.battery1)
                     self.batteryBar1.show()
@@ -700,6 +701,21 @@ class MartyRobotController(QWidget):
                 elif event.key() == Qt.Key.Key_E:
                     rotate(self.currentRobot, 15)
                     print("rotating right")
+                elif event.key() == Qt.Key.Key_Y: 
+                    regard(self.currentRobot,'angry')
+                    print("regard angry")
+                elif event.key() == Qt.Key.Key_U:
+                    regard(self.currentRobot, 'excited')
+                    print("regard excited")
+                elif event.key() == Qt.Key.Key_I:
+                    regard(self.currentRobot, 'normal')
+                    print("regard normal")
+                elif event.key() == Qt.Key.Key_O:
+                    regard(self.currentRobot, 'wide')
+                    print("regard wide")
+                elif event.key() == Qt.Key.Key_P:
+                    regard(self.currentRobot, 'wiggle')
+                    print("regard wiggle")
                 #emotes
                 elif event.key() == Qt.Key.Key_1:
                     self.currentRobot.celebrate()

@@ -9,8 +9,8 @@
 from martypy import Marty
 
 # ----------------------------------------------------------
-# Fonction : 
-# Description :
+# Fonctions :  Regard
+# Description : Fonctions qui permettent de changer les yeux du robot
 # ----------------------------------------------------------
 
 def regard(my_marty,pose_or_angle='normal'):
@@ -22,8 +22,8 @@ def regard(my_marty,pose_or_angle='normal'):
         print("Marty n'accepte que le format entier et les mots angry, excited, normal, wide, et wiggle pour ses yeux")
 
 # ----------------------------------------------------------
-# Fonction : 
-# Description :
+# Fonction : Danse
+# Description : Permet au robot de danser
 # ----------------------------------------------------------
 
 def danse(my_marty,direction='right',type_dance=1, temps=3000):
@@ -33,8 +33,8 @@ def danse(my_marty,direction='right',type_dance=1, temps=3000):
         my_marty.circle_dance(direction,temps)
 
 # ----------------------------------------------------------
-# Fonction : 
-# Description :
+# Fonction : Célebre
+# Description : Permet au robot de célebrer
 # ----------------------------------------------------------
 
 def celebre(my_marty,temps=4000):

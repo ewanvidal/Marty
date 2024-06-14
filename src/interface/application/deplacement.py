@@ -7,8 +7,9 @@
 #----------------------------------------------------------
 
 # ----------------------------------------------------------
-# Fonction : 
-# Description :
+# Fonction : Avance
+# Description : Utilise la fonction de référence walk afin de faire
+# marcher le robot d'un certain nombre de pas passé en paramètre
 # ----------------------------------------------------------
 
 def avance(my_marty,distance):
@@ -16,8 +17,9 @@ def avance(my_marty,distance):
         my_marty.walk(1,'auto',0,25, 1500, None)
 
 # ----------------------------------------------------------
-# Fonction : 
-# Description :
+# Fonction : Rotate
+# Description : Marty effectue une rotation d'un certain angle
+# passé en paramètre
 # ----------------------------------------------------------
  
 def rotate(my_marty,angle):
@@ -35,24 +37,25 @@ def rotate(my_marty,angle):
         my_marty.walk(0,'auto',angle)
     
 # ----------------------------------------------------------
-# Fonction : 
-# Description :
+# Fonction : Retourner
+# Description : Marty se retourne de 180° afin de marcher
 # ----------------------------------------------------------
 
 def retourner(my_marty):
    rotate(my_marty,180)
 
 # ----------------------------------------------------------
-# Fonction : 
-# Description :
+# Fonction : Recule
+# Description : Marty recule grâce à la fonction de référence walk
 # ----------------------------------------------------------
 
 def recule(my_marty,distance):
     my_marty.walk(distance,'auto',0,-25, 1500, None)
 
 # ----------------------------------------------------------
-# Fonction : 
-# Description :
+# Fonction : deplacement_couleur
+# Description : Récupère une couleur et associe le mouvement
+# correspondant
 # ----------------------------------------------------------
 
 def deplacement_couleur(couleur):
@@ -74,10 +77,11 @@ def deplacement_couleur(couleur):
     else :
         print(couleur)
         print("Couleur non valide")
-        
+
 # ----------------------------------------------------------
-# Fonction : 
-# Description :
+# Fonction : movementDirection
+# Description : Associe un mouvement à l'appel d'une fonction 
+# créée dans ce fichier, forward appelle avance par exemple
 # ----------------------------------------------------------
 
 def movementDirection(my_marty,movement):
